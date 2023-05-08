@@ -1,0 +1,56 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Pattaya&family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
+* {
+    font-family: 'Poppins',
+        sans-serif;
+}
+.bg-dark {
+    background-color: #008B8B!important;
+}
+
+
+
+.sidebar {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 16px;
+  }
+
+ 
+
+  li {
+    list-style: none;
+    margin: 20px 0 20px 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    margin-left: -300px;
+    transition: 0.4s;
+    background-color: #008B8B;
+  }
+
+  .active-main-content {
+    margin-left: 250px;
+  }
+
+  .active-sidebar {
+    margin-left: 0;
+  }
+
+  #main-content {
+    transition: 0.4s;
+  }

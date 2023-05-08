@@ -1,0 +1,22 @@
+body {
+    background-color: white;
+}
+a {
+    text-decoration: none;
+}
+.shadow-lg {
+    border-radius: 1rem;
+}
+.img-fluid {
+    border-radius: 1rem 0 0 1rem;
+    height: 100%;
+}
+h5 {
+    letter-spacing: 1px;
+}
+.mb-5 {
+    color: #393f81;
+}
+.register {
+    color: #393f81;
+}

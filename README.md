@@ -1,3 +1,3 @@
-# WELCOME TO BRANCH RAFAEL
-
-This is a rafael's branch, please read my code and contribute if you want...
+# Final Project
+Overtime Application
+by Group 7

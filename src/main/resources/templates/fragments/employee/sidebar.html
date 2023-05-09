@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="_csrf" th:content="${_csrf.token}" />
     <meta name="_csrf_header" th:content="${_csrf.headerName}" />
-
     <link rel="stylesheet" th:href="@{css/style1.css}" />
 
     <!-- Boxicons CDN Link -->
@@ -38,7 +37,7 @@
     <div class="sidebar" th:fragment="sidebar">
       <div class="logo-details">
         <i
-          ><img align="top" th:src="@{img/overtime.png}" width="150" height="150"
+          ><img align="top" src="../img/overtime.png" width="150" height="150"
         /></i>
       </div>
       <ul class="nav-links">

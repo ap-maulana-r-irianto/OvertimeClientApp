@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+<<<<<<< HEAD
 
 <head th:replace="fragments/executive/sidebar :: head"></head>
 
+=======
+<head th:replace="fragments/executive/sidebar :: head"></head>
+>>>>>>> c014ff594b934414d4a50a1d70ff3cb8b635e2e9
 <body>
     <div th:replace="fragments/executive/sidebar :: sidebar"></div>
     <section class="home-section">
@@ -23,6 +27,7 @@
                         </tr>
                         <tbody>
                             <tr th:each="project : ${project}">
+<<<<<<< HEAD
                                 <td th:text="${project.id}"></td>
                                 <td th:text="${project.nama}"></td>
                                 <td th:text="${project.start_date}"></td>
@@ -31,6 +36,16 @@
                                 <td th:text="${employee.status}"></td>
                             </tr>
                         </tbody>
+=======
+                              <td th:text="${project.id}"></td>
+                              <td th:text="${project.nama}"></td>
+                              <td th:text="${project.start_date}"></td>
+                              <td th:text="${project.end_date}"></td>
+                              <td th:text="${project.description}"></td>
+                              <td th:text="${employee.status}"></td>
+                            </tr>
+                          </tbody>
+>>>>>>> c014ff594b934414d4a50a1d70ff3cb8b635e2e9
                     </table>
                 </div>
 

@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+<<<<<<< HEAD
 
 <head th:replace="fragments/executive/sidebar :: head"></head>
 
+=======
+<head th:replace="fragments/executive/sidebar :: head"></head>
+>>>>>>> c014ff594b934414d4a50a1d70ff3cb8b635e2e9
 <body>
     <div th:replace="fragments/executive/sidebar :: sidebar"></div>
     <section class="home-section">
         <nav th:replace="fragments/executive/sidebar :: navbar"></nav>
+<<<<<<< HEAD
+=======
+
+>>>>>>> c014ff594b934414d4a50a1d70ff3cb8b635e2e9
         <div class="home-content">
             <div class="title">Data Reimburse</div>
             <div class="sales-boxes">
                 <div class="recent-sales box">
+<<<<<<< HEAD
 
                     <table id="region-table" class="table table-bordered table-striped">
                         <tr>
@@ -28,12 +37,32 @@
                     </table>
                     <button type="button" class="btn btn-info" data-bs-toggle="modal"
                         data-bs-target="#reimburse-executive">
+=======
+                    
+
+                    <table id="region-table" class="table table-bordered table-striped">
+                            <tr>
+                                <th class="col-2">No</th>
+                                <th class="col-2">Nama</th>
+                                <th class="col-2">Email</th>
+                                <th class="col-2">Tanggal</th>
+                                <th class="col-2">Nominal</th>
+                                <th class="col-2">Keterangan</th>
+                                <th class="col-2">Status</th>
+                                <th class="col-2">Bukti Pembayaran</th>
+                                <th class="col-5">Action</th>
+                            </tr>
+                      
+                    </table>
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#reimburse-executive">
+>>>>>>> c014ff594b934414d4a50a1d70ff3cb8b635e2e9
                         Pengajuan Reimburse
                     </button>
                 </div>
             </div>
         </div>
     </section>
+<<<<<<< HEAD
     
     <!-- Modal Create -->
     <div class="modal fade" id="reimburse-executive" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -72,4 +101,45 @@
         </div>
         <div th:replace="fragments/executive/sidebar :: script"></div>
 </body>
+=======
+      <!-- Modal Create -->
+      <div class="modal fade" id="reimburse-executive" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Pengajuan Reimburse</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <div class="modal-body">
+                      <div class="mb-3">
+                          <label for="name" class="form-label">Tanggal</label>
+                          <input type="date" class="form-control" id="jam-mulai">
+                      </div>
+                      <div class="mb-3">
+                          <label for="name" class="form-label">Nominal</label>
+                          <input type="number" class="form-control" id="Nominal">
+                      </div>
+                      <div class="mb-3">
+                          <label for="name" class="form-label">Keterangan</label>
+                          <input type="name" class="form-control" id="Keterangan">
+                      </div>
+                      <div class="mb-3">
+                          <label for="name" class="form-label">Bukti Pembayaran</label>
+                          <input type="file" class="form-control" id="Keterangan">
+                      </div>
+                  </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" onclick="create()">Submit</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div th:replace="fragments/executive/sidebar :: script"></div>
+
+</body>
+
+>>>>>>> c014ff594b934414d4a50a1d70ff3cb8b635e2e9
 </html>

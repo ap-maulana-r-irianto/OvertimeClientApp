@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head th:replace="fragments/hr/sidebar :: head"></head>
+
+<body>
+    <div th:replace="fragments/hr/sidebar :: sidebar"></div>
+    <section class="home-section">
+        <nav th:replace="fragments/hr/sidebar :: navbar"></nav>
+
+        <div class="home-content">
+            <div class="title">Data Karyawan</div>
+            <div class="sales-boxes">
+                <div class="recent-sales box">
+                        <table id="region-table" class="table table-bordered table-striped">
+                            <tr>
+                                <th class="col-2">No</th>
+                                <th class="col-2">Nama Departemen</th>
+                                <th class="col-2">Nama</th>
+                                <th class="col-2">Username</th>
+                                <th class="col-2">Password</th>
+                                <th class="col-2">Phone</th>
+                                <th class="col-2">Email</th>
+                                <th class="col-2">Status</th>
+                                <th class="col-2">Payroll</th>
+                                <th class="col-5">Action</th>
+                            </tr>
+                            <tbody>
+                                <tr th:each="employee : ${employee}">
+                                  <td th:text="${employee.id}"></td>
+                                  <td th:text="${employee.departement.name}"></td>
+                                  <td th:text="${employee.name}"></td>
+                                  <td th:text="${employee.username}"></td>
+                                  <td th:text="${employee.password}"></td>
+                                  <td th:text="${employee.Phone}"></td>
+                                  <td th:text="${employee.email}"></td>
+                                  <td th:text="${employee.status}"></td>
+                                  <td th:text="${employee.Payroll}"></td>
+                                  <td class="d-flex align-items-center gap-4">
+                                    <a th:href="@{/user/update/{id} (id=${user.id})}" class="btn btn-warning px-5 fw-bold">Edit</a>
+                                    <form th:action="@{/user/{id} (id=${user.id})}" th:method="DELETE">
+                                      <button type="submit" class="btn btn-danger px-5 fw-bold"
+                                        onclick="return confirm('Are you sure want to delete thiss!!!')">Delete</button>
+                                    </form>
+                                  </td>
+                                </tr>
+                              </tbody>
+                    </table>
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                        data-bs-target="#karyawan-hr">
+                        Tambah Karyawan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Modal Create -->
+    <div class="modal fade" id="karyawan-hr" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Pengajuan Reimburse</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Tanggal</label>
+                            <input type="date" class="form-control" id="jam-mulai">
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nominal</label>
+                            <input type="number" class="form-control" id="Nominal">
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Keterangan</label>
+                            <input type="name" class="form-control" id="Keterangan">
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Bukti Pembayaran</label>
+                            <input type="file" class="form-control" id="Keterangan">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="create()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:replace="fragments/hr/sidebar :: script"></div>
+
+</body>
+
+</html>

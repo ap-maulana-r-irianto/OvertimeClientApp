@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head th:replace="fragments/executive/sidebar :: head"></head>
+
+<body>
+    <div th:replace="fragments/executive/sidebar :: sidebar"></div>
+    <section class="home-section">
+        <nav th:replace="fragments/executive/sidebar :: navbar"></nav>
+        <div class="home-content">
+            <div class="title">Profil</div>
+            <div class="sales-boxes">
+                <div class="recent-sales box">
+
+                    <div class="container">
+                        <form th:action="@{/karyawan}" th:object="${karyawan}" th:method="POST">
+                            <label for="status" class="form-label">Nama Departemen</label>
+                            <select disabled="on" class="form-select" th:field="*{karyawan.id}">
+                                <option value="0" disabled selected></option>
+                                <option th:each="karyawan : ${karyawan}" th:text="${karyawan.departemen}"
+                                    th:value="${karyawanid}">
+                                </option>
+                            </select>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nama</label>
+                                <input disabled="on" type="text" class="form-control" th:field="*{name}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Phone</label>
+                                <input disabled="on" type="text" class="form-control" th:field="*{phone}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Email</label>
+                                <input disabled="on" type="text" class="form-control" th:field="*{email}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">status</label>
+                                <input disabled="on" type="text" class="form-control" th:field="*{status}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Payroll</label>
+                                <input disabled="on" type="text" class="form-control" th:field="*{payroll}">
+                            </div>
+
+
+                            <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                data-bs-target="#edit-profil">
+                                Edit Profil
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Modal Create -->
+    <div class="modal fade" id="edit-profil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Edit Profil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Phone</label>
+                            <input type="number" class="form-control" id="phone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Username</label>
+                            <input type="name" class="form-control" id="Username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Password</label>
+                            <input type="name" class="form-control" id="Password">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-info" onclick="create()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:replace="fragments/executive/sidebar :: script"></div>
+</body>
+
+</html>

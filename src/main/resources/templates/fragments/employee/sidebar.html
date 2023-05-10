@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head th:fragment="head">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="_csrf" th:content="${_csrf.token}" />
+  <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+  <link rel="stylesheet" th:href="@{css/style1.css}" />
+
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <!-- Boxicons CDN Link -->
+  <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css" />
+
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+  <title> Employee Dashboard | Group 7</title>
+  <link rel="shortcut icon" th:href="@{img/LogoBiru.png}" width="100" height="30">
+</head>
+
+<body>
+  <div class="sidebar" th:fragment="sidebar">
+    <div class="logo-details">
+
+      <i><img align="top" th:src="@{img/LogoDashboard.png}" width="200" height="55" alt="Gambar"></i>
+      <!-- <img align="top" src="../../static/img/logo.png" width="150" height="150"/> -->
+    </div>
+    <ul class="nav-links">
+      <li>
+        <a th:href="@{/homeemployee}">
+          <i class="bx bx-grid-alt"></i>
+          <span class="links_name">Dashboard</span>
+        </a>
+      </li>
+
+      <li>
+        <a th:href="@{/homeemployee/reimburse}">
+          <i class="bx bx-money"></i>
+          <span class="links_name">Reimburse</span>
+        </a>
+      </li>
+      <li>
+        <a th:href="@{/employee/overtime}">
+          <i class="bx bx-pie-chart-alt-2"></i>
+          <span class="links_name">Overtime</span>
+        </a>
+      </li>
+      <li class="log_out">
+        <a href="#">
+          <i class="bx bx-log-out"></i>
+          <span class="links_name">Log out</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div th:fragment="script">
+    <script>
+      let sidebar = document.querySelector(".sidebar");
+      let sidebarBtn = document.querySelector(".sidebarBtn");
+      sidebarBtn.onclick = function () {
+        sidebar.classList.toggle("active");
+        if (sidebar.classList.contains("active")) {
+          sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+        } else sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+      };
+    </script>
+    <!-- JQuery Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"></script>
+
+    <!-- DataTables Script -->
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+    <!-- SweetAlert2 Script -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  </div>
+</body>
+</html>

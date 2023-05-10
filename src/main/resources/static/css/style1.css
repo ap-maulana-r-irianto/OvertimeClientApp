@@ -51,6 +51,8 @@
 	position: relative;
 	list-style: none;
 	height: 50px;
+	right: 30px;
+	
 }
 
 .sidebar .nav-links li a {

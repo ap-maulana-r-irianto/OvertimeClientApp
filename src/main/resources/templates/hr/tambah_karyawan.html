@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head th:replace="fragments/hr/sidebar :: head"></head>
+
+<body>
+    <div th:replace="fragments/hr/sidebar :: sidebar"></div>
+    <section class="home-section">
+        <nav th:replace="fragments/hr/sidebar :: navbar"></nav>
+
+        <div class="home-content">
+            <div class="title">Tambah Data Karyawan</div>
+            <div class="sales-boxes">
+                <div class="recent-sales box">
+
+                    <div class="container">
+                        <form th:action="@{/karyawan}" th:object="${karyawan}" th:method="POST">
+                            <label for="status" class="form-label">Nama Departemen</label>
+                            <select class="form-select" th:field="*{karyawan.id}">
+                                <option value="0" disabled selected>Pilih Departemen</option>
+                                <option th:each="karyawan : ${karyawan}" th:text="${karyawan.departemen}"
+                                    th:value="${karyawanid}">
+                                </option>
+                            </select>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nama</label>
+                                <input type="text" class="form-control" th:field="*{name}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Username</label>
+                                <input type="text" class="form-control" th:field="*{Username}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Password</label>
+                                <input type="text" class="form-control" th:field="*{password}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Phone</label>
+                                <input type="text" class="form-control" th:field="*{phone}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Email</label>
+                                <input type="text" class="form-control" th:field="*{email}">
+                            </div>
+                            <fieldset>
+                                <label for="name" class="form-label">Status</label>
+
+                                <div class="mb-3">
+                                    <input type="radio" id="status" name="drone" value="aktif" checked>
+                                    <label for="aktif">aktif</label>
+
+                                    <input type="radio" id="status" name="drone" value="tidak_aktif">
+                                    <label for="tidak_aktif">Tidak Aktif</label>
+                                </div>
+                            </fieldset>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Payroll</label>
+                                <input type="text" class="form-control" th:field="*{payroll}">
+                            </div>
+                            <button type="submit" class="btn btn-info">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div th:replace="fragments/hr/sidebar :: script"></div>
+</body>
+
+</html>

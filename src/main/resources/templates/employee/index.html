@@ -1,47 +1,72 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head th:replace="fragments/hr/sidebar :: head"></head>
+<head th:replace="fragments/employee/sidebar :: head"></head>
+
 <body>
-    <div th:replace="fragments/hr/sidebar :: sidebar"></div>
-    <section th:replace="fragments/hr/sidebar :: section"></section>
-    <div class="home-content">
-        <div class="title">Profil</div>
-        <div class="sales-boxes">
-            <div class="recent-sales box">
-                <div class="container">
-                    <form>
-                        <label for="status" class="form-label">Nama Departemen</label>
-                        <select disabled="on" class="form-select">
-                            <option value="0" disabled selected></option>
-                        </select>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Nama</label>
+    <div th:replace="fragments/employee/sidebar :: sidebar"></div>
+    <section class="home-section">
+        <nav>
+            <div class="sidebar-button">
+                <i class='bx bx-menu sidebarBtn'></i>
+                <span class="dashboard">Employee Dashboard</span>
+            </div>
+            <!-- <div class="search-box">
+            <input type="text" placeholder="Search...">
+            <i class='bx bx-search' ></i>
+          </div> -->
+            <div class="dropdown">
+                <button class="dropbtn">
+                    <i class='bx bxs-user bx-sm'></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="#">Profil</a>
+                    <a href="#">logout</a>
+                </div>
+            </div>
+        </nav>
+
+
+
+        <div class="home-content">
+            <div class="title">Profil</div>
+            <div class="sales-boxes">
+                <div class="recent-sales box">
+                    
+                    <div class="container">
+                        <form>
+                            <label for="name" class="form-label">Nama Departemen</label>
                             <input disabled="on" type="text" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Phone</label>
-                            <input disabled="on" type="text" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Email</label>
-                            <input disabled="on" type="text" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">status</label>
-                            <input disabled="on" type="text" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Payroll</label>
-                            <input disabled="on" type="text" class="form-control">
-                        </div>
-                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#edit-profil">
-                            Edit Profil
-                        </button>
-                    </form>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nama</label>
+                                <input disabled="on" type="text" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Phone</label>
+                                <input disabled="on" type="text" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Email</label>
+                                <input disabled="on" type="text" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">status</label>
+                                <input disabled="on" type="text" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Payroll</label>
+                                <input disabled="on" type="text" class="form-control">
+                            </div>
+
+
+                            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#edit-profil">
+                                Edit Profil
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     
     <!-- Modal Create -->
     <div class="modal fade" id="edit-profil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -74,6 +99,6 @@
             </div>
         </div>
     </div>
-    <div th:replace="fragments/hr/sidebar :: script"></div>
+    <div th:replace="fragments/employee/sidebar :: script"></div>
 </body>
 </html>

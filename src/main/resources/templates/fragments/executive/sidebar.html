@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<<<<<<< HEAD
 
 <head th:fragment="head">
-=======
-  <head th:fragment="head">
->>>>>>> c014ff594b934414d4a50a1d70ff3cb8b635e2e9
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="_csrf" th:content="${_csrf.token}" />
     <meta name="_csrf_header" th:content="${_csrf.headerName}" />
-<<<<<<< HEAD
 
     <link rel="stylesheet" th:href="@{css/style1.css}" />
 
@@ -37,46 +32,45 @@
         </div>
         <ul class="nav-links">
             <li>
-                <a th:href="@{/homeexecutive}" class="active">
+                <a th:href="@{/home_executive}" class="active">
                     <i class="bx bx-grid-alt"></i>
                     <span class="links_name">Dashboard</span>
                 </a>
             </li>
 
             <li>
-                <a th:href="@{/datareimburse}">
+                <a th:href="@{/reimburse_executive}">
                     <i class="bx bx-money"></i>
-                    <span class="links_name">Data Reimburse</span>
+                    <span class="links_name">Reimburse</span>
                 </a>
             </li>
             <li>
-                <a th:href="@{/dataovertime}">
+                <a th:href="@{/overtime_executive}">
                     <i class="bx bx-pie-chart-alt-2"></i>
-                    <span class="links_name">Data Overtime</span>
+                    <span class="links_name">Overtime</span>
                 </a>
             </li>
             <li>
-                <a th:href="@{/project}">
+                <a th:href="@{/project_executive}">
                     <i class="bx bx-book-alt"></i>
                     <span class="links_name">Project</span>
                 </a>
             </li>
 
             <li>
-                <a th:href="@{/projectkaryawan}">
+                <a th:href="@{/employee_project_executive}">
                     <i class="bx bx-task"></i>
-                    <span class="links_name">Projek Karyawan</span>
+                    <span class="links_name">Employee Project</span>
                 </a>
             </li>
 
             <li class="log_out">
-                <form th:action="@{/logout}" th:method="POST">
+                <a th:action="@{/logout}" th:method="POST">
                     <i class="bx bx-log-out"></i>
-                    <button type="submit" class="links_name">
-                        Logout
-                    </button>
-                </form>
+                    <span class="links_name">Log out</span>
+                </a>
             </li>
+            
         </ul>
     </div>
     <nav th:fragment="navbar">
@@ -84,22 +78,12 @@
             <i class="bx bx-menu sidebarBtn"></i>
             <span class="dashboard">Executive Dashboard</span>
         </div>
-        <!-- <div class="search-box">
-      <input type="text" placeholder="Search...">
-      <i class='bx bx-search' ></i>
-    </div> -->
         <div class="dropdown">
             <button class="dropbtn">
                 <i class="bx bxs-user bx-sm"></i>
             </button>
             <div class="dropdown-content">
-                <a th:href="@{/profil}">Profil</a>
-                <form th:action="@{/logout}" th:method="POST">
-                    <i class="bx bx-log-out"></i>
-                    <button type="submit" class="links_name">
-                        Logout
-                    </button>
-                </form>
+                <a th:href="@{/profil_executive}">Profil</a>
             </div>
         </div>
     </nav>
@@ -131,139 +115,3 @@
 </body>
 
 </html>
-=======
-    
-    <link rel="stylesheet" th:href="@{css/style1.css}" />
-
-    <!-- Boxicons CDN Link -->
-    <link
-      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css"
-    />
-
-    <!-- DataTables CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css"
-    />
-    <title>Executive Dashboard | Group 7</title>
-  </head>
-  <body>
-    <div class="sidebar" th:fragment="sidebar">
-      <div class="logo-details">
-        <i
-          ><img align="top" th:src="@{img/overtime.png}" width="150" height="150"
-        /></i>
-        <!-- <span class="logo_name">Overtime</span> -->
-      </div>
-      <ul class="nav-links">
-        <li>
-          <a th:href="@{/homeexecutive}" class="active">
-            <i class="bx bx-grid-alt"></i>
-            <span class="links_name">Dashboard</span>
-          </a>
-        </li>
-
-        <li>
-          <a th:href="@{/datareimburse}">
-            <i class="bx bx-money"></i>
-            <span class="links_name">Data Reimburse</span>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/dataovertime}">
-            <i class="bx bx-pie-chart-alt-2"></i>
-            <span class="links_name">Data Overtime</span>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/project}">
-            <i class="bx bx-book-alt"></i>
-            <span class="links_name">Project</span>
-          </a>
-        </li>
-
-        <li>
-          <a th:href="@{/projectkaryawan}">
-            <i class="bx bx-task"></i>
-            <span class="links_name">Projek Karyawan</span>
-          </a>
-        </li>
-
-        <li class="log_out">
-          <form th:action="@{/logout}" th:method="POST">
-            <i class="bx bx-log-out"></i>
-            <button type="submit" class="links_name">
-              Logout
-            </button>
-          </form>
-        </li>
-      </ul>
-    </div>
-    <nav th:fragment="navbar">
-      <div class="sidebar-button">
-        <i class="bx bx-menu sidebarBtn"></i>
-        <span class="dashboard">Executive Dashboard</span>
-      </div>
-      <!-- <div class="search-box">
-      <input type="text" placeholder="Search...">
-      <i class='bx bx-search' ></i>
-    </div> -->
-      <div class="dropdown">
-        <button class="dropbtn">
-          <i class="bx bxs-user bx-sm"></i>
-        </button>
-        <div class="dropdown-content">
-          <a th:href="@{/profil}">Profil</a>
-          <form th:action="@{/logout}" th:method="POST">
-            <i class="bx bx-log-out"></i>
-            <button type="submit" class="links_name">
-              Logout
-            </button>
-          </form>
-        </div>
-      </div>
-    </nav>
-    <div th:fragment="script">
-      <script>
-        let sidebar = document.querySelector(".sidebar");
-        let sidebarBtn = document.querySelector(".sidebarBtn");
-        sidebarBtn.onclick = function () {
-          sidebar.classList.toggle("active");
-          if (sidebar.classList.contains("active")) {
-            sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
-          } else sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-        };
-      </script>
-      <!-- JQuery Script -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
-      <!-- Option 1: Bootstrap Bundle with Popper -->
-      <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"
-      ></script>
-
-      <!-- DataTables Script -->
-      <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
-
-      <!-- SweetAlert2 Script -->
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    </div>
-  </body>
-</html>
->>>>>>> c014ff594b934414d4a50a1d70ff3cb8b635e2e9

@@ -33,33 +33,52 @@
     </div>
     <ul class="nav-links">
       <li>
-        <a th:href="@{/homeemployee}">
+        <a th:href="@{/home_employee}" class="active">
           <i class="bx bx-grid-alt"></i>
           <span class="links_name">Dashboard</span>
         </a>
       </li>
 
       <li>
-        <a th:href="@{/homeemployee/reimburse}">
+        <a th:href="@{/reimburse_employee}">
           <i class="bx bx-money"></i>
           <span class="links_name">Reimburse</span>
         </a>
       </li>
       <li>
-        <a th:href="@{/employee/overtime}">
+        <a th:href="@{/overtime_employee}">
           <i class="bx bx-pie-chart-alt-2"></i>
           <span class="links_name">Overtime</span>
         </a>
       </li>
       <li class="log_out">
-        <a href="#">
+        <a th:action="@{/logout}" th:method="POST">
           <i class="bx bx-log-out"></i>
           <span class="links_name">Log out</span>
         </a>
       </li>
     </ul>
-    
   </div>
+  <nav th:fragment="navbar">
+    <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">Employee Dashboard</span>
+    </div>
+    <!-- <div class="search-box">
+    <input type="text" placeholder="Search...">
+    <i class='bx bx-search' ></i>
+  </div> -->
+    <!-- <div class="dropdown">
+        <button class="dropbtn">
+            <i class='bx bxs-user bx-sm'></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="#">Profil</a>
+            <a href="#">logout</a>
+        </div>
+    </div> -->
+</nav>
+
   <div th:fragment="script">
     <script>
       let sidebar = document.querySelector(".sidebar");
@@ -87,4 +106,5 @@
 
   </div>
 </body>
+
 </html>

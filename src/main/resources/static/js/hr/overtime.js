@@ -1,72 +1,103 @@
 $(document).ready(function () {
-    $('#role-table').DataTable({
+    $('#overtime-table').DataTable({
         ajax: {
-            url: 'api/role',
+            url: 'api/overtime',
             dataSrc: ''
         },
         columns: [{
                 data: 'id'
             },
             {
-                data: 'name'
+                data: 'start_time'
+            },
+            {
+                data: 'end_time'
+            },
+            {
+                data: 'description'
+            },
+            {
+                data: 'status'
+            },
+            {
+                data: 'employee.name'
             },
             {
                 "data": null,
                 render: function (data, row, type, meta) {
                     return `
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detail-role"
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detail-overtime"
                         onclick="detail(${data.id})">
                         <i class="bi bi-exclamation-circle-fill"></i>
                     </button>
 
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#update-role"
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#update-overtime"
                         onclick="beforeUpdate(${data.id})">
                         <i class="bi bi-pencil-square"></i>
                     </button>
 
                     <button type="button" class="btn btn-danger"
-                        onclick="roleDelete(${data.id})">
+                        onclick="overtimeDelete(${data.id})">
                         <i class="bi bi-trash3-fill"></i>
                     </button>
                     
                     `;
                 }
             }
+
         ]
     });
-});
 
-function detail(id) {
     $.ajax({
         method: "GET",
-        url: "api/role/" + id,
+        url: "api/employee",
         dataType: "JSON",
         success: function (result) {
-            $('#role-det-id').val(`${result.id}`)
-            $('#role-det-name').val(`${result.name}`)
+            // $('#overtime-in-employee').append(
+            //     '<option value="">Choose Your employee</option>'
+            // );
+            $.each(result, function (key, value) {
+                $('.overtime-in-employee').append(
+                    '<option value="'
+                    + value.id
+                    + '">'
+                    + value.name
+                    + '</option>'
+                )
+            })
         }
     })
-}
+  
+});
+
 
 function create() {
-    let valName = $('#role-in-name').val();
+    let valStart_time = $('#overtime-in-start_time').val();
+    let valEnd_time = $('#overtime-in-end_time').val();
+    let valDescription = $('#overtime-in-description').val();
+    let valStatus = $('#overtime-in-status').val();
+    let valEmployee = $('.overtime-in-employee').val();
     $.ajax({
         method: "POST",
-        url: "api/role",
+        url: "api/overtime",
         dataType: "JSON",
         beforeSend: addCsrfToken(),
         data: JSON.stringify({
-            name: valName
+            start_time: valStart_time,
+            end_time: valEnd_time,
+            description: valDescription,
+            status: valStatus,
+            employee: valEmployee
         }),
         contentType: "application/json",
         success: result => {
             console.log(result)
-            $('#create-role').modal('hide')
-            $('#role-table').DataTable().ajax.reload()
+            $('#create-overtime').modal('hide')
+            $('#overtime-table').DataTable().ajax.reload()
             Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: 'Successfully to insert',
+                title: 'Pengajuan Overtime Berhasil',
                 showConfirmButton: false,
                 timer: 2000
             })
@@ -80,27 +111,36 @@ function create() {
               })
         }
     })
+
 }
 
 function beforeUpdate(id) {
     $.ajax({
         method: "GET",
-        url: "api/role/" + id,
+        url: "api/overtime/" + id,
         dataType: "JSON",
         success: function (result) {
-            $('#role-up-name').val(`${result.name}`)
-            $('#role-up-id').val(`${result.id}`)
+            $('#overtime-up-id').val(`${result.id}`)
+            $('#overtime-up-start_time').val(`${result.start_time}`)
+            $('#overtime-up-end_time').val(`${result.end_time}`)
+            $('#overtime-up-description').val(`${result.description}`)
+            $('#overtime-up-status').val(`${result.status}`)
+            $('.overtime-in-employee').val(`${result.employee.name}`)
         }
     })
 }
 
 function update() {
-    let valId = $('#role-up-id').val()
-    let valName = $('#role-up-name').val()
+    let valId = $('#overtime-up-id').val()
+    let valStart_time = $('#overtime-up-start_time').val()
+    let valEnd_time = $('#overtime-up-end_time').val()
+    let valDescription = $('#overtime-up-description').val()
+    let valStatus= $('#overtime-up-status').val()
+    let valEmployee = $('#overtime-in-employee').val()
 
     Swal.fire({
         title: 'Are you sure?',
-        text: "Do you want to change this role!",
+        text: "Do you want to change this submission!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -110,16 +150,20 @@ function update() {
         if (result.isConfirmed) {
             $.ajax({
                 method: "PUT",
-                url: "api/role/" + valId,
+                url: "api/overtime/" + valId,
                 dataType: "JSON",
                 beforeSend: addCsrfToken(),
                 contentType: "application/json",
                 data: JSON.stringify({
-                    name: valName
+                    start_time: valStart_time,
+                    end_time: valEnd_time,
+                    description: valDescription,
+                    status: valStatus,
+                    employee: valEmployee
                 }),
                 success: result => {
-                    $('#update-role').modal('hide')
-                    $('#role-table').DataTable().ajax.reload()
+                    $('#update-overtime').modal('hide')
+                    $('#overtime-table').DataTable().ajax.reload()
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
@@ -141,11 +185,11 @@ function update() {
     })
 }
 
-function roleDelete(id) {
+function overtimeDelete(id) {
 
     Swal.fire({
         title: 'Are you sure?',
-        text: "You won't be delete this role!",
+        text: "You won't be delete this overtime!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -155,11 +199,11 @@ function roleDelete(id) {
         if (result.isConfirmed) {
             $.ajax({
                 method: "DELETE",
-                url: "api/role/" + id,
+                url: "api/overtime/" + id,
                 dataType: "JSON",
                 beforeSend: addCsrfToken(),
                 success: result => {
-                    $('#role-table').DataTable().ajax.reload()
+                    $('#overtime-table').DataTable().ajax.reload()
                     Swal.fire({
                         title: 'Successfully to Delete',
                         width: 600,
@@ -181,4 +225,20 @@ function roleDelete(id) {
         }
     })
 
+}
+
+function detail(id) {
+    $.ajax({
+        method: "GET",
+        url: "api/overtime/" + id,
+        dataType: "JSON",
+        success: function (result) {
+            $('#overtime-det-id').val(`${result.id}`)
+            $('#overtime-det-start_time').val(`${result.start_time}`)
+            $('#overtime-det-end_time').val(`${result.end_time}`)
+            $('#overtime-det-description').val(`${result.description}`)
+            $('#overtime-det-status').val(`${result.status}`)
+            $('.overtime-up-employee').val(`${result.employee.name}`)
+        }
+    })
 }

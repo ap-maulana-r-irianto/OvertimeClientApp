@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    $('#region-table').DataTable({
+    $('#department-table').DataTable({
         ajax: {
-            url: 'api/region',
+            url: 'api/department',
             dataSrc: ''
         },
         columns: [{
@@ -11,58 +11,101 @@ $(document).ready(function () {
                 data: 'name'
             },
             {
+                data: 'manager.name'
+            },
+            {
+                data: 'hr.name'
+            },
+            {
                 "data": null,
                 render: function (data, row, type, meta) {
                     return `
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detail-region"
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detail-department"
                         onclick="detail(${data.id})">
                         <i class="bi bi-exclamation-circle-fill"></i>
                     </button>
 
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#update-region"
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#update-department"
                         onclick="beforeUpdate(${data.id})">
                         <i class="bi bi-pencil-square"></i>
                     </button>
 
                     <button type="button" class="btn btn-danger"
-                        onclick="regionDelete(${data.id})">
+                        onclick="departmentDelete(${data.id})">
                         <i class="bi bi-trash3-fill"></i>
                     </button>
                     
                     `;
                 }
             }
+
         ]
     });
+
+    $.ajax({
+        method: "GET",
+        url: "api/employee",
+        dataType: "JSON",
+        success: function (result) {
+           
+            $.each(result, function (key, value) {
+                $('.employeeproject-in-manager').append(
+                    '<option value="'
+                    + value.id
+                    + '">'
+                    + value.name
+                    + '</option>'
+                ), 
+                $('.employeeproject-in-hr').append(
+                    '<option value="'
+                    + value.id
+                    + '">'
+                    + value.name
+                    + '</option>'
+                )
+            })
+        }
+    })
+
 });
 
 function detail(id) {
     $.ajax({
         method: "GET",
-        url: "api/region/" + id,
+        url: "api/department/" + id,
         dataType: "JSON",
         success: function (result) {
-            $('#region-det-id').val(`${result.id}`)
-            $('#region-det-name').val(`${result.name}`)
+            $('#department-det-id').val(`${result.id}`)
+            $('#department-det-name').val(`${result.name}`)
+            $('#department-det-manager').val(`${result.manager.name}`)
+            $('#department-det-hr').val(`${result.hr.name}`)
         }
     })
 }
 
 function create() {
-    let valName = $('#region-in-name').val();
+    let valName = $('#department-in-name').val();
+    let valManager = $('.department-in-manager').val();
+    let valHr = $('.department-in-hr').val();
     $.ajax({
         method: "POST",
-        url: "api/region",
+        url: "api/department",
         dataType: "JSON",
         beforeSend: addCsrfToken(),
         data: JSON.stringify({
-            name: valName
+            name: valName,
+            manager: {
+                id: valManager
+            },
+            hr: {
+                id: valHr
+            }
         }),
         contentType: "application/json",
         success: result => {
             console.log(result)
-            $('#create-region').modal('hide')
-            $('#region-table').DataTable().ajax.reload()
+            $('#create-department').modal('hide')
+            $('#department-table').DataTable().ajax.reload()
             Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -80,27 +123,32 @@ function create() {
               })
         }
     })
+
 }
 
 function beforeUpdate(id) {
     $.ajax({
         method: "GET",
-        url: "api/region/" + id,
+        url: "api/department/" + id,
         dataType: "JSON",
         success: function (result) {
-            $('#region-up-name').val(`${result.name}`)
-            $('#region-up-id').val(`${result.id}`)
+            $('#department-up-id').val(`${result.id}`)
+            $('#department-up-name').val(`${result.name}`)
+            $('.department-in-manager').val(`${result.manager.id}`)
+            $('.department-in-hr').val(`${result.hr.id}`)
         }
     })
 }
 
 function update() {
-    let valId = $('#region-up-id').val()
-    let valName = $('#region-up-name').val()
+    let valId = $('#department-up-id').val()
+    let valName = $('#department-up-name').val()
+    let valManager = $('.department-up-manager').val()
+    let valHr = $('.department-up-hr').val()
 
     Swal.fire({
         title: 'Are you sure?',
-        text: "Do you want to change this region!",
+        text: "Do you want to change this department!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -110,16 +158,22 @@ function update() {
         if (result.isConfirmed) {
             $.ajax({
                 method: "PUT",
-                url: "api/region/" + valId,
+                url: "api/department/" + valId,
                 dataType: "JSON",
                 beforeSend: addCsrfToken(),
                 contentType: "application/json",
                 data: JSON.stringify({
-                    name: valName
+                    name: valName,
+                    manager: {
+                        id: valManager
+                    },
+                    hr: {
+                        id: valHr
+                    }
                 }),
                 success: result => {
-                    $('#update-region').modal('hide')
-                    $('#region-table').DataTable().ajax.reload()
+                    $('#update-department').modal('hide')
+                    $('#department-table').DataTable().ajax.reload()
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
@@ -141,11 +195,11 @@ function update() {
     })
 }
 
-function regionDelete(id) {
+function departmentDelete(id) {
 
     Swal.fire({
         title: 'Are you sure?',
-        text: "You won't be delete this region!",
+        text: "You won't be delete this department!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -155,11 +209,11 @@ function regionDelete(id) {
         if (result.isConfirmed) {
             $.ajax({
                 method: "DELETE",
-                url: "api/region/" + id,
+                url: "api/department/" + id,
                 dataType: "JSON",
                 beforeSend: addCsrfToken(),
                 success: result => {
-                    $('#region-table').DataTable().ajax.reload()
+                    $('#department-table').DataTable().ajax.reload()
                     Swal.fire({
                         title: 'Successfully to Delete',
                         width: 600,

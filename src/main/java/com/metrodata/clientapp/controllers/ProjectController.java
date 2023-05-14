@@ -20,40 +20,76 @@ public class ProjectController {
     
     private ProjectService projectService;
 
-    @GetMapping
-    public String index(Model model) {
+    @GetMapping("/hr")
+    public String indexHr(Model model) {
         List<Project> projects = projectService.getAll();
         model.addAttribute("projects", projects);
-        return "project/index";
+        return "hr/project";
     }
 
     @GetMapping("/create")
-    public String createView(Project project, Model model) {
-        return "project/create-form";
+    public String createViewHr(Project project, Model model) {
+        return "hr/project";
     }
 
     @PostMapping
-    public String create(Project project) {
+    public String createHr(Project project) {
         projectService.create(project);
-        return "redirect:/project";
+        return "redirect:/hr";
     }
 
     @GetMapping("/update/{id}")
-    public String updateView(@PathVariable int id, Model model) {
+    public String updateViewHr(@PathVariable int id, Model model) {
         model.addAttribute("project", projectService.getById(id));
-        return "project/update-form";
+        return "hr/project";
     }
 
     @PutMapping("/{id}")
-    public String update(@PathVariable int id, Project project){
+    public String updateHr(@PathVariable int id, Project project){
         projectService.update(id, project);
-        return "redirect:/project";
+        return "redirect:/hr";
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable int id){
+    public String deleteHr(@PathVariable int id){
         projectService.delete(id);
-        return "redirect:/project";
+        return "redirect:/hr";
+    }
+
+    @GetMapping("/executive")
+    public String indexExecutive(Model model) {
+        List<Project> projects = projectService.getAll();
+        model.addAttribute("projects", projects);
+        return "executive/project";
+    }
+
+    @GetMapping("/executive/create")
+    public String createViewExecutive(Project project, Model model) {
+        return "executive/project";
+    }
+
+    @PostMapping("/executive")
+    public String createExecutive(Project project) {
+        projectService.create(project);
+        return "redirect:/executive";
+    }
+
+    @GetMapping("/executive/update/{id}")
+    public String updateViewExecutive(@PathVariable int id, Model model) {
+        model.addAttribute("project", projectService.getById(id));
+        return "executive/project";
+    }
+
+    @PutMapping("/executive/{id}")
+    public String updateExecutive(@PathVariable int id, Project project){
+        projectService.update(id, project);
+        return "redirect:/executive";
+    }
+
+    @DeleteMapping("/executive/{id}")
+    public String deleteExecutive(@PathVariable int id){
+        projectService.delete(id);
+        return "redirect:/executive";
     }
 
 }

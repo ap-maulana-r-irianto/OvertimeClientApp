@@ -9,30 +9,39 @@
         <nav th:replace="fragments/hr/sidebar :: navbar"></nav>
 
         <div class="home-content">
-            <div class="title">Tambah Projek</div>
+            <div class="title">Add Karyawan</div>
             <div class="sales-boxes">
                 <div class="recent-sales box">
 
-
                     <div class="container">
-                        <form th:action="@{/karyawan}" th:object="${karyawan}" th:method="POST">
+                        <form th:action="@{/employee}" th:object="${employee}" th:method="POST">
+                            <label for="status" class="form-label">Department</label>
+                            <select class="form-select" th:field="*{employee.id}">
+                                <option value="0" disabled selected>Choose Department</option>
+                                <option th:each="employee : ${employee}" th:text="${employee.department.name}"
+                                    th:value="${employeeid}">
+                                </option>
+                            </select>
                             <div class="mb-3">
-                                <label for="name" class="form-label">Nama Project</label>
+                                <label for="name" class="form-label">Name</label>
                                 <input type="text" class="form-control" th:field="*{name}">
                             </div>
                             <div class="mb-3">
-                                <label for="name" class="form-label">Tanggal Mulai</label>
-                                <input type="date" class="form-control" th:field="*{start_date}">
+                                <label for="name" class="form-label">Username</label>
+                                <input type="text" class="form-control" th:field="*{Username}">
                             </div>
                             <div class="mb-3">
-                                <label for="name" class="form-label">Tanggal Selesai</label>
-                                <input type="date" class="form-control" th:field="*{end_date}">
+                                <label for="name" class="form-label">Password</label>
+                                <input type="text" class="form-control" th:field="*{password}">
                             </div>
                             <div class="mb-3">
-                                <label for="name" class="form-label">Keterangan</label>
-                                <input type="text" class="form-control" th:field="*{Keterangan}">
+                                <label for="name" class="form-label">Phone</label>
+                                <input type="text" class="form-control" th:field="*{phone}">
                             </div>
-
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Email</label>
+                                <input type="text" class="form-control" th:field="*{email}">
+                            </div>
                             <fieldset>
                                 <label for="name" class="form-label">Status</label>
 
@@ -44,13 +53,10 @@
                                     <label for="tidak_aktif">Tidak Aktif</label>
                                 </div>
                             </fieldset>
-
                             <div class="mb-3">
                                 <label for="name" class="form-label">Payroll</label>
                                 <input type="text" class="form-control" th:field="*{payroll}">
                             </div>
-
-
                             <button type="submit" class="btn btn-info">Submit</button>
                         </form>
                     </div>

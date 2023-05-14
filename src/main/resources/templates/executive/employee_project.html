@@ -9,27 +9,34 @@
         <nav th:replace="fragments/executive/sidebar :: navbar"></nav>
 
         <div class="home-content">
-            <div class="title">Data Projek</div>
+            <div class="title">Employee Project</div>
             <div class="sales-boxes">
                 <div class="recent-sales box">
-                    <table id="project-table" class="table table-bordered table-striped">
-                        <thead class="table-light">
+                    <table id="employeeproject-table" class="table table-bordered table-striped">
                         <tr>
                             <th class="col-1">No</th>
+                            <th class="col-2">Employee Name</th>
                             <th class="col-2">Project</th>
-                            <th class="col-2">Start Date</th>
+                            <th class="col-2">Strat Date</th>
                             <th class="col-2">End Date</th>
                             <th class="col-5">Description</th>
                             <th class="col-2">Status</th>
                         </tr>
-                        </thead>
+                        <tbody>
                     </table>
+
+                </div>
+
+                <div>
+
                 </div>
             </div>
+
+        </div>
         </div>
     </section>
 
-  
+
       <!-- JQuery Script -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js">
     </script>
@@ -45,11 +52,9 @@
     <!-- SweetAlert2 Script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script th:src="@{/js/hr/project.js}"></script>
+
+    <script th:src="@{/js/hr/employeeProject.js}"></script>
     <div th:replace="fragments/executive/sidebar :: script"></div>
-
-
-
 </body>
 
 </html>

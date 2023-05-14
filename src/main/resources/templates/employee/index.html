@@ -1,53 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head th:replace="fragments/employee/sidebar :: head"></head>
-<<<<<<< HEAD
 
-=======
->>>>>>> c014ff594b934414d4a50a1d70ff3cb8b635e2e9
 <body>
     <div th:replace="fragments/employee/sidebar :: sidebar"></div>
     <section class="home-section">
-        <nav>
-            <div class="sidebar-button">
-                <i class='bx bx-menu sidebarBtn'></i>
-                <span class="dashboard">Employee Dashboard</span>
-            </div>
-            <!-- <div class="search-box">
-            <input type="text" placeholder="Search...">
-            <i class='bx bx-search' ></i>
-          </div> -->
-            <div class="dropdown">
-                <button class="dropbtn">
-                    <i class='bx bxs-user bx-sm'></i>
-                </button>
-                <div class="dropdown-content">
-                    <a href="#">Profil</a>
-                    <a href="#">logout</a>
-                </div>
-            </div>
-        </nav>
-
-
-
+        <nav th:replace="fragments/employee/sidebar :: navbar"></nav>
         <div class="home-content">
             <div class="title">Profil</div>
             <div class="sales-boxes">
                 <div class="recent-sales box">
                     
-                    <div class="container">
+                    <div class="container" >
                         <form>
-<<<<<<< HEAD
-                            <label for="name" class="form-label">Nama Departemen</label>
+                            <label for="name" class="form-label">Department</label>
                             <input disabled="on" type="text" class="form-control">
-=======
-                            <label for="status" class="form-label">Nama Departemen</label>
-                            <select disabled="on" class="form-select">
-                                <option value="0" disabled selected></option>
-                            </select>
->>>>>>> c014ff594b934414d4a50a1d70ff3cb8b635e2e9
                             <div class="mb-3">
-                                <label for="name" class="form-label">Nama</label>
+                                <label for="name" class="form-label">Name</label>
                                 <input disabled="on" type="text" class="form-control">
                             </div>
                             <div class="mb-3">
@@ -59,7 +28,7 @@
                                 <input disabled="on" type="text" class="form-control">
                             </div>
                             <div class="mb-3">
-                                <label for="name" class="form-label">status</label>
+                                <label for="name" class="form-label">Status</label>
                                 <input disabled="on" type="text" class="form-control">
                             </div>
                             <div class="mb-3">
@@ -71,6 +40,20 @@
                             <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#edit-profil">
                                 Edit Profil
                             </button>
+
+                             <!-- <tr th:each="country : ${countries}">
+            <td th:text="${country.id}"></td>
+            <td th:text="${country.code}"></td>
+            <td th:text="${country.name}"></td>
+            <td th:text="${country.region.name}"></td>
+            <td class="d-flex align-items-center gap-4">
+                <a th:href="@{/country/update/{id} (id=${country.id})}" class="btn btn-warning px-5 fw-bold">Edit</a>
+                <form th:action="@{/country/{id} (id=${country.id})}" th:method="DELETE">
+                    <button type="submit" class="btn btn-danger px-5 fw-bold"
+                            onclick="return confirm('Are you sure want to delete thiss!!!')">Delete</button>
+                </form>
+            </td>
+          </tr> -->
                         </form>
                     </div>
                 </div>
@@ -78,7 +61,7 @@
         </div>
     </section>
     
-    <!-- Modal Create -->
+    <!-- Modal Edit -->
     <div class="modal fade" id="edit-profil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">

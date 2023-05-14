@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<<<<<<< HEAD
-
 <head th:replace="fragments/executive/sidebar :: head"></head>
 
-=======
-<head th:replace="fragments/executive/sidebar :: head"></head>
->>>>>>> c014ff594b934414d4a50a1d70ff3cb8b635e2e9
 <body>
     <div th:replace="fragments/executive/sidebar :: sidebar"></div>
     <section class="home-section">
@@ -15,129 +10,88 @@
             <div class="title">Profil</div>
             <div class="sales-boxes">
                 <div class="recent-sales box">
-<<<<<<< HEAD
-
-=======
                     
->>>>>>> c014ff594b934414d4a50a1d70ff3cb8b635e2e9
-                    <div class="container">
-                        <form th:action="@{/karyawan}" th:object="${karyawan}" th:method="POST">
-                            <label for="status" class="form-label">Nama Departemen</label>
-                            <select disabled="on" class="form-select" th:field="*{karyawan.id}">
-                                <option value="0" disabled selected></option>
-<<<<<<< HEAD
-                                <option th:each="karyawan : ${karyawan}" th:text="${karyawan.departemen}"
-                                    th:value="${karyawanid}">
-=======
-                                <option th:each="karyawan : ${karyawan}" th:text="${karyawan.departemen}" th:value="${karyawanid}">
->>>>>>> c014ff594b934414d4a50a1d70ff3cb8b635e2e9
-                                </option>
-                            </select>
+                    <div class="container" >
+                        <form>
+                            <label for="name" class="form-label">Department</label>
+                            <input disabled="on" type="text" class="form-control">
                             <div class="mb-3">
-                                <label for="name" class="form-label">Nama</label>
-                                <input disabled="on" type="text" class="form-control" th:field="*{name}">
+                                <label for="name" class="form-label">Name</label>
+                                <input disabled="on" type="text" class="form-control">
                             </div>
                             <div class="mb-3">
                                 <label for="name" class="form-label">Phone</label>
-                                <input disabled="on" type="text" class="form-control" th:field="*{phone}">
+                                <input disabled="on" type="text" class="form-control">
                             </div>
                             <div class="mb-3">
                                 <label for="name" class="form-label">Email</label>
-                                <input disabled="on" type="text" class="form-control" th:field="*{email}">
+                                <input disabled="on" type="text" class="form-control">
                             </div>
                             <div class="mb-3">
-                                <label for="name" class="form-label">status</label>
-                                <input disabled="on" type="text" class="form-control" th:field="*{status}">
+                                <label for="name" class="form-label">Status</label>
+                                <input disabled="on" type="text" class="form-control">
                             </div>
                             <div class="mb-3">
                                 <label for="name" class="form-label">Payroll</label>
-                                <input disabled="on" type="text" class="form-control" th:field="*{payroll}">
+                                <input disabled="on" type="text" class="form-control">
                             </div>
 
 
-<<<<<<< HEAD
-                            <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                                data-bs-target="#edit-profil">
-=======
                             <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#edit-profil">
->>>>>>> c014ff594b934414d4a50a1d70ff3cb8b635e2e9
                                 Edit Profil
                             </button>
+
+                             <!-- <tr th:each="country : ${countries}">
+            <td th:text="${country.id}"></td>
+            <td th:text="${country.code}"></td>
+            <td th:text="${country.name}"></td>
+            <td th:text="${country.region.name}"></td>
+            <td class="d-flex align-items-center gap-4">
+                <a th:href="@{/country/update/{id} (id=${country.id})}" class="btn btn-warning px-5 fw-bold">Edit</a>
+                <form th:action="@{/country/{id} (id=${country.id})}" th:method="DELETE">
+                    <button type="submit" class="btn btn-danger px-5 fw-bold"
+                            onclick="return confirm('Are you sure want to delete thiss!!!')">Delete</button>
+                </form>
+            </td>
+          </tr> -->
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-<<<<<<< HEAD
-    <!-- Modal Create -->
+    
+    <!-- Modal Edit -->
     <div class="modal fade" id="edit-profil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Edit Profil</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Phone</label>
-                            <input type="number" class="form-control" id="phone">
-                        </div>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Username</label>
-                            <input type="name" class="form-control" id="Username">
-                        </div>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Password</label>
-                            <input type="name" class="form-control" id="Password">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-info" onclick="create()">Submit</button>
-                    </div>
-                </div>
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Edit Profil</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        </div>
-
-        <div th:replace="fragments/executive/sidebar :: script"></div>
-=======
-<!-- Modal Create -->
-<div class="modal fade" id="edit-profil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-aria-labelledby="staticBackdropLabel" aria-hidden="true">
-<div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Edit Profil</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
             <div class="modal-body">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Phone</label>
-                    <input type="number" class="form-control" id="phone">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Phone</label>
+                        <input type="number" class="form-control" id="phone">
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Username</label>
+                        <input type="name" class="form-control" id="Username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Password</label>
+                        <input type="name" class="form-control" id="Password">
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="name" class="form-label">Username</label>
-                    <input type="name" class="form-control" id="Username">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-info" onclick="create()">Submit</button>
                 </div>
-                <div class="mb-3">
-                    <label for="name" class="form-label">Password</label>
-                    <input type="name" class="form-control" id="Password">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-info" onclick="create()">Submit</button>
             </div>
         </div>
     </div>
-</div>
-
-<div th:replace="fragments/executive/sidebar :: script"></div>
->>>>>>> c014ff594b934414d4a50a1d70ff3cb8b635e2e9
+    <div th:replace="fragments/executive/sidebar :: script"></div>
 </body>
-
 </html>

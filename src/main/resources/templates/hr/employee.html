@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head th:replace="fragments/hr/sidebar :: head"></head>
+
+<body>
+    <div th:replace="fragments/hr/sidebar :: sidebar"></div>
+    <section class="home-section">
+        <nav th:replace="fragments/hr/sidebar :: navbar"></nav>
+
+        <div class="home-content">
+            <div class="title">Employee</div>
+            <div class="sales-boxes">
+                <div class="recent-sales box">
+                    <table id="employee-table" class="table table-bordered table-striped">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="col-2">No</th>
+                                <th class="col-2">Department</th>
+                                <th class="col-2">Name</th>
+                                <th class="col-2">Phone</th>
+                                <th class="col-2">Email</th>
+                                <th class="col-2">Status</th>
+                                <th class="col-2">Payroll</th>
+                                <th class="col-5">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="employee : ${employee}">
+                                <td th:text="${employee.id}"></td>
+                                <td th:text="${employee.department.name}"></td>
+                                <td th:text="${employee.name}"></td>
+                                <td th:text="${employee.phone}"></td>
+                                <td th:text="${employee.email}"></td>
+                                <td th:text="${employee.status}"></td>
+                                <td th:text="${employee.payroll}"></td>
+                                <td class="d-flex align-items-center gap-4">
+                                    <a th:href="@{/hr/update/{id} (id=${employee.id})}"
+                                        class="btn btn-warning px-5 fw-bold">Edit</a>
+                                    <form th:action="@{/employee/{id} (id=${employee.id})}" th:method="DELETE">
+                                        <button type="submit" class="btn btn-danger px-5 fw-bold"
+                                            onclick="return confirm('Are you sure want to delete thiss!!!')">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a th:href="@{/hr/add_employee}" class="btn btn-info">Add Employee</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
+
+
+    <div th:replace="fragments/hr/sidebar :: script"></div>
+
+</body>
+
+</html>

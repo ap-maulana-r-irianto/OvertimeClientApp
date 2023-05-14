@@ -18,49 +18,139 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @PreAuthorize("hasAnyRole('HRD','EMPLOYEE','LEADER')")
 public class ReimburseController {
-    
+
     private ReimburseService reimburseService;
 
-    @GetMapping
-    public String index(Model model) {
+    @GetMapping("/employee")
+    public String indexEmployee(Model model) {
         List<Reimburse> reimburses = reimburseService.getAll();
         model.addAttribute("reimburses", reimburses);
-        return "reimburse/index";
+        return "employee/reimburse";
     }
 
     @GetMapping("/{id}")
-    public String indexId(@PathVariable int id, Model model) {
+    public String indexIdEmployee(@PathVariable int id, Model model) {
         model.addAttribute("reimburse", reimburseService.getById(id));
-        return "reimburse/detail-form";
+        return "employee/reimburse";
     }
 
     @GetMapping("/create")
-    public String createView(ReimburseRequest reimburseRequest) {
-        return "reimburse/create-form";
+    public String createViewEmployee(ReimburseRequest reimburseRequest) {
+        return "employee/reimburse";
     }
 
     @PostMapping
-    public String create(ReimburseRequest reimburseRequest) {
+    public String createEmployee(ReimburseRequest reimburseRequest) {
         reimburseService.create(reimburseRequest);
-        return "redirect:/reimburse";
+        return "redirect:/employee";
     }
 
     @GetMapping("/update/{id}")
-    public String updateView(@PathVariable int id, Model model) {
+    public String updateViewEmployee(@PathVariable int id, Model model) {
         model.addAttribute("reimburse", reimburseService.getById(id));
-        return "reimburse/update-form";
+        return "employee/reimburse";
     }
 
     @PutMapping("/{id}")
-    public String update(@PathVariable int id, Reimburse reimburse) {
+    public String updateEmployee(@PathVariable int id, Reimburse reimburse) {
         reimburseService.update(id, reimburse);
-        return "redirect:/reimburse";
+        return "redirect:/employee";
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable int id) {
+    public String deleteEmployee(@PathVariable int id) {
         reimburseService.delete(id);
-        return "redirect:/reimburse";
+        return "redirect:/employee";
+    }
+
+    @GetMapping("/hr")
+    public String indexHr(Model model) {
+        List<Reimburse> reimburses = reimburseService.getAll();
+        model.addAttribute("reimburses", reimburses);
+        return "hr/reimburse";
+    }
+
+    @GetMapping("/hr/{id}")
+    public String indexIdHr(@PathVariable int id, Model model) {
+        model.addAttribute("reimburse", reimburseService.getById(id));
+        return "hr/reimburse";
+    }
+
+    @GetMapping("/hr/create")
+    public String createViewHr(ReimburseRequest reimburseRequest) {
+        return "hr/reimburse";
+    }
+
+    @PostMapping("/hr")
+    public String createHr(ReimburseRequest reimburseRequest) {
+        reimburseService.create(reimburseRequest);
+        return "redirect:/hr";
+    }
+
+    @GetMapping("/hr/update/{id}")
+    public String updateViewHr(@PathVariable int id, Model model) {
+        model.addAttribute("reimburse", reimburseService.getById(id));
+        return "hr/reimburse";
+    }
+
+    @PutMapping("/hr/{id}")
+    public String updateHr(@PathVariable int id, Reimburse reimburse) {
+        reimburseService.update(id, reimburse);
+        return "redirect:/hr";
+    }
+
+    @DeleteMapping("/hr/{id}")
+    public String deleteHr(@PathVariable int id) {
+        reimburseService.delete(id);
+        return "redirect:/hr";
+    }
+
+    @GetMapping("/hr/executive")
+    public String indexExecutiveEmployee(Model model) {
+        List<Reimburse> reimburses = reimburseService.getAll();
+        model.addAttribute("reimburses", reimburses);
+        return "executive/reimburse_employee";
+    }
+    @GetMapping("/executive")
+    public String indexExecutive(Model model) {
+        List<Reimburse> reimburses = reimburseService.getAll();
+        model.addAttribute("reimburses", reimburses);
+        return "executive/reimburse";
+    }
+
+    @GetMapping("/executive/{id}")
+    public String indexIdExecutive(@PathVariable int id, Model model) {
+        model.addAttribute("reimburse", reimburseService.getById(id));
+        return "executive/reimburse";
+    }
+
+    @GetMapping("/executive/create")
+    public String createViewExecutive(ReimburseRequest reimburseRequest) {
+        return "executive/reimburse";
+    }
+
+    @PostMapping("/executive")
+    public String createExecutive(ReimburseRequest reimburseRequest) {
+        reimburseService.create(reimburseRequest);
+        return "redirect:/executive";
+    }
+
+    @GetMapping("/executive/update/{id}")
+    public String updateViewExecutive(@PathVariable int id, Model model) {
+        model.addAttribute("reimburse", reimburseService.getById(id));
+        return "executive/reimburse";
+    }
+
+    @PutMapping("/executive/{id}")
+    public String updateExecutive(@PathVariable int id, Reimburse reimburse) {
+        reimburseService.update(id, reimburse);
+        return "redirect:/executive";
+    }
+
+    @DeleteMapping("/executive/{id}")
+    public String deleteExecutive(@PathVariable int id) {
+        reimburseService.delete(id);
+        return "redirect:/executive";
     }
 
 }

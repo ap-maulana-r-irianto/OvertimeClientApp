@@ -22,14 +22,13 @@
                 <img src="https://www.corpnce.com/wp-content/uploads/2021/03/img61.webp" alt="login form"
                   class="img-fluid" />
               </div>
+
               <div class="col-md-6 col-lg-7 d-flex align-items-center">
                 <div class="card-body p-4 p-lg-5 text-black">
                   <form th:action="@{/login}" th:method="POST" th:object="${loginRequest}">
                     <div class="d-flex align-items-center mb-3 pb-1">
-                      <img th:src="@{img/LogoLogin.png}"  width="400" height="90" alt="Gambar">
-                      <!-- <img th:src="@{img/LogoLogin.png}"  width="400" height="80"> -->
-                      <!-- <span class="h3 fw-bold mb-0">Overtime Application</span> -->
-                    </div>
+                     <img th:src="@{img/LogoLogin.png}" width="400" height="90">
+                    </div>          
 
                     <h5 class="fw-normal mb-3 pb-3">
                       Sign into your account

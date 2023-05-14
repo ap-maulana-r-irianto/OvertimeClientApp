@@ -52,8 +52,9 @@
 	list-style: none;
 	height: 50px;
 	right: 30px;
-	
+
 }
+
 
 .sidebar .nav-links li a {
 	height: 100%;
@@ -62,14 +63,24 @@
 	align-items: center;
 	text-decoration: none;
 	transition: all 0.4s ease;
+
 }
 
 .sidebar .nav-links li a.active {
 	background: #113374;
+
+
 }
 
 .sidebar .nav-links li a:hover {
 	background: #081D45;
+	/* display: block; */
+	/* width: 100%; */
+	/* padding: 10px; */
+	/* text-align: center; */
+	/* font-size: 16px; */
+	/* margin-top: 20px; */
+
 }
 
 .sidebar .nav-links li i {
@@ -90,6 +101,8 @@
 	position: absolute;
 	bottom: 0;
 	width: 100%;
+	left: 5px;
+
 }
 
 .home-section {
@@ -208,7 +221,7 @@ nav .profile-details i {
 .home-section .home-content {
 	position: relative;
 	padding-top: 70px;
-	
+
 }
 
 .home-content .overview-boxes {
@@ -220,7 +233,7 @@ nav .profile-details i {
 	padding-top: 10px;
 	height: 30%;
 	margin-bottom: 26px;
-	
+
 }
 
 .overview-boxes .box {
@@ -233,17 +246,17 @@ nav .profile-details i {
 	border-radius: 12px;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 
-	
+
 }
 
 .overview-boxes .box-topic {
 	font-size: 15px;
-	font-weight: 500;
+	font-weight: 300;
 }
 
 .home-content .box .number {
 	display: inline-block;
-	font-size: 35px;
+	font-size: 40px;
 	margin-top: -6px;
 	font-weight: 500;
 }
@@ -251,7 +264,7 @@ nav .profile-details i {
 .home-content .box .indicator {
 	display: flex;
 	align-items: center;
-	
+
 }
 
 .home-content .box .indicator i {
@@ -327,6 +340,17 @@ nav .profile-details i {
 	max-height: 470px;
 }
 
+.home-content .sales-boxes .recent-sales table {
+	display: block;
+	overflow: auto;
+	overflow-x: auto;
+	overflow-y: auto;
+	height: 300px;
+	width: 100%;
+}
+
+
+
 .home-content .title {
 	position: relative;
 	font-size: 24px;
@@ -350,7 +374,7 @@ nav .profile-details i {
 	background-color: #2697FF;
 	color: #fff;
 	/* margin-bottom: 10px; */
-	
+
 }
 
 .sales-boxes .sales-details li.topic {
@@ -591,4 +615,3 @@ nav .profile-details i {
 .dropdown:hover .dropdown-content {
 	display: block;
 }
-

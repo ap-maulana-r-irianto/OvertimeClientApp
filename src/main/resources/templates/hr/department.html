@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head th:replace="fragments/hr/sidebar :: head"></head>
+
+<body>
+    <div th:replace="fragments/hr/sidebar :: sidebar"></div>
+    <section class="home-section">
+        <nav th:replace="fragments/hr/sidebar :: navbar"></nav>
+
+        <div class="home-content">
+            <div class="title">Department</div>
+            <div class="sales-boxes">
+                <div class="recent-sales box">
+                    <table id="department-table" class="table table-bordered table-striped">
+                        <thead class="table-light">
+                        <tr>
+                            <th class="col-1">No</th>
+                            <th class="col-2">Department</th>
+                            <th class="col-2">Manager</th>
+                            <th class="col-2">HR</th>
+                            <th class="col-2">Action</th>
+                            
+                        </tr>
+                        </thead>
+                    </table>
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#create-department">
+                        Add Department
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Create -->
+    <div class="modal fade" id="create-department" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add Department</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Department</label>
+                        <input type="name" class="form-control" id="department-in-name">
+                    </div>
+                    <label for="name" class="form-label">Manager</label>
+                    <select class="form-select department-in-manager">
+                        <option value="0" disabled selected>Choose Manager</option>
+                    </select>
+                    <label for="name" class="form-label">HR</label>
+                    <select class="form-select department-in-hr">
+                        <option value="0" disabled selected>Choose HR</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-info" onclick="create()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Modal update -->
+     <div class="modal fade" id="update-department" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+     <div class="modal-dialog">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h5 class="modal-title" id="staticBackdropLabel">Add Department</h5>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             </div>
+             <div class="modal-body">
+                 <div class="mb-3">
+                     <label for="name" class="form-label">Department</label>
+                     <input type="name" class="form-control" id="department-up-name">
+                 </div>
+                 <label for="name" class="form-label">Manager</label>
+                 <select class="form-select department-up-manager">
+                     <option value="0" disabled selected>Choose Manager</option>
+                 </select>
+                 <label for="name" class="form-label">HR</label>
+                 <select class="form-select department-up-hr">
+                     <option value="0" disabled selected>Choose HR</option>
+                 </select>
+             </div>
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                 <button type="button" class="btn btn-info" onclick="update()">Submit</button>
+             </div>
+         </div>
+     </div>
+ </div>
+
+      <!-- JQuery Script -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js">
+    </script>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
+
+    <!-- DataTables Script -->
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+    <!-- SweetAlert2 Script -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <script th:src="@{/js/hr/department.js}"></script>
+    <div th:replace="fragments/hr/sidebar :: script"></div>
+
+
+</body>
+
+</html>

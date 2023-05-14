@@ -7,31 +7,30 @@
     <div th:replace="fragments/executive/sidebar :: sidebar"></div>
     <section class="home-section">
         <nav th:replace="fragments/executive/sidebar :: navbar"></nav>
-
         <div class="home-content">
-            <div class="title">Data Projek</div>
+            <div class="title">History Overtime</div>
             <div class="sales-boxes">
                 <div class="recent-sales box">
-                    <table id="project-table" class="table table-bordered table-striped">
+
+                    <table id="overtime-table" class="table table-bordered table-striped">
                         <thead class="table-light">
                         <tr>
                             <th class="col-1">No</th>
-                            <th class="col-2">Project</th>
-                            <th class="col-2">Start Date</th>
-                            <th class="col-2">End Date</th>
-                            <th class="col-5">Description</th>
+                            <th class="col-2">Nama</th>
+                            <th class="col-2">Jam Mulai</th>
+                            <th class="col-2">Jam Selesai</th>
+                            <th class="col-5">Keterangan</th>
                             <th class="col-2">Status</th>
                         </tr>
                         </thead>
                     </table>
+                  
                 </div>
             </div>
         </div>
     </section>
-
-  
-      <!-- JQuery Script -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js">
+     <!-- JQuery Script -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js">
     </script>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -45,11 +44,8 @@
     <!-- SweetAlert2 Script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script th:src="@{/js/hr/project.js}"></script>
+    <script th:src="@{/js/employee/overtime.js}"></script>
     <div th:replace="fragments/executive/sidebar :: script"></div>
-
-
-
 </body>
 
 </html>

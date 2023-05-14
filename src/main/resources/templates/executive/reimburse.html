@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
-<head th:replace="fragments/employee/sidebar :: head"></head>
+<head th:replace="fragments/executive/sidebar :: head"></head>
 
 <body>
-    <div th:replace="fragments/employee/sidebar :: sidebar"></div>
+    <div th:replace="fragments/executive/sidebar :: sidebar"></div>
     <section class="home-section">
-        <nav th:replace="fragments/employee/sidebar :: navbar"></nav>
+        <nav th:replace="fragments/executive/sidebar :: navbar"></nav>
         <div class="home-content">
             <div class="title">History Reimburse Submission</div>
             <div class="sales-boxes">
@@ -14,17 +14,17 @@
 
                     <table id="reimburse-table" class="table table-bordered table-striped">
                         <thead class="table-light">
-                            <tr>
-                                <th class="col-1">No</th>
-                                <th class="col-2">Name</th>
-                                <th class="col-2">type</th>
-                                <th class="col-2">Date</th>
-                                <th class="col-2">Nominal</th>
-                                <th class="col-2">Description</th>
-                                <th class="col-2">Payment Slip</th>
-                                <th class="col-2">Status</th>
-                                <th class="col-2">Action</th>
-                            </tr>
+                        <tr>
+                            <th class="col-1">No</th>
+                            <th class="col-2">Name</th>
+                            <th class="col-2">Email</th>
+                            <th class="col-2">Date</th>
+                            <th class="col-2">Nominal</th>
+                            <th class="col-5">Description</th>
+                            <th class="col-2">Status</th>
+                            <th class="col-2">Payement Slip</th>
+                            <th class="col-2">Action</th>
+                        </tr>
                         </thead>
                     </table>
                     <button type="button" class="btn btn-info" data-bs-toggle="modal"
@@ -35,7 +35,7 @@
             </div>
         </div>
     </section>
-
+    
     <!-- Modal Create -->
     <div class="modal fade" id="create-reimburse" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -109,8 +109,8 @@
             </div>
         </div>
     </div>
-    <!-- JQuery Script -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js">
+      <!-- JQuery Script -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js">
     </script>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -126,7 +126,6 @@
 
 
     <script th:src="@{/js/employee/reimburse.js}"></script>
-    <div th:replace="fragments/employee/sidebar :: script"></div>
+    <div th:replace="fragments/executive/sidebar :: script"></div>
 </body>
-
 </html>

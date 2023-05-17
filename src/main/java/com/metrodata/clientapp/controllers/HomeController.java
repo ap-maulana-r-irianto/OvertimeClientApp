@@ -89,4 +89,8 @@ public class HomeController {
     public String typeHr(Model model) {
         return "hr/type";
     }
+    @GetMapping("/status_hr")
+    public String statusHr(Model model) {
+        return "hr/status";
+    }
 }

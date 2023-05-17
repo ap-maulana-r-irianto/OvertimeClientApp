@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    $('#department-table').DataTable({
+    $('#status-table').DataTable({
         ajax: {
-            url: 'api/department',
+            url: 'api/status',
             dataSrc: ''
         },
         columns: [{
@@ -11,100 +11,58 @@ $(document).ready(function () {
                 data: 'name'
             },
             {
-                data: 'manager.name'
-            },
-            {
-                data: 'hr.name'
-            },
-            {
                 "data": null,
                 render: function (data, row, type, meta) {
                     return `
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detail-department"
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detail-status"
                         onclick="detail(${data.id})">
                         <i class="bi bi-exclamation-circle-fill"></i>
                     </button>
 
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#update-department"
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#update-status"
                         onclick="beforeUpdate(${data.id})">
                         <i class="bi bi-pencil-square"></i>
                     </button>
 
                     <button type="button" class="btn btn-danger"
-                        onclick="departmentDelete(${data.id})">
+                        onclick="statusDelete(${data.id})">
                         <i class="bi bi-trash3-fill"></i>
                     </button>
                     
                     `;
                 }
             }
-
         ]
     });
-
-    $.ajax({
-        method: "GET",
-        url: "api/employee",
-        dataType: "JSON",
-        success: function (result) {
-           
-            $.each(result, function (key, value) {
-                $('.employeeproject-in-manager').append(
-                    '<option value="'
-                    + value.id
-                    + '">'
-                    + value.name
-                    + '</option>'
-                ), 
-                $('.employeeproject-in-hr').append(
-                    '<option value="'
-                    + value.id
-                    + '">'
-                    + value.name
-                    + '</option>'
-                )
-            })
-        }
-    })
 });
 
 function detail(id) {
     $.ajax({
         method: "GET",
-        url: "api/department/" + id,
+        url: "api/status/" + id,
         dataType: "JSON",
         success: function (result) {
-            $('#department-det-id').val(`${result.id}`)
-            $('#department-det-name').val(`${result.name}`)
-            $('#department-det-manager').val(`${result.manager.name}`)
-            $('#department-det-hr').val(`${result.hr.name}`)
+            $('#status-det-id').val(`${result.id}`)
+            $('#status-det-name').val(`${result.name}`)
         }
     })
 }
 
 function create() {
-    let valName = $('#department-in-name').val();
-    let valManager = $('.department-in-manager').val();
-    let valHr = $('.department-in-hr').val();
+    let valName = $('#status-in-name').val();
     $.ajax({
         method: "POST",
-        url: "api/department",
+        url: "api/status",
         dataType: "JSON",
         beforeSend: addCsrfToken(),
         data: JSON.stringify({
-            name: valName,
-            manager: {
-                id: valManager
-            },
-            hr: {
-                id: valHr
-            }
+            name: valName
         }),
         contentType: "application/json",
         success: result => {
             console.log(result)
-            $('#create-department').modal('hide')
-            $('#department-table').DataTable().ajax.reload()
+            $('#create-status').modal('hide')
+            $('#status-table').DataTable().ajax.reload()
             Swal.fire({
                 position: 'center',
                 icon: 'success',
@@ -122,32 +80,27 @@ function create() {
               })
         }
     })
-
 }
 
 function beforeUpdate(id) {
     $.ajax({
         method: "GET",
-        url: "api/department/" + id,
+        url: "api/status/" + id,
         dataType: "JSON",
         success: function (result) {
-            $('#department-up-id').val(`${result.id}`)
-            $('#department-up-name').val(`${result.name}`)
-            $('.department-in-manager').val(`${result.manager.id}`)
-            $('.department-in-hr').val(`${result.hr.id}`)
+            $('#status-up-name').val(`${result.name}`)
+            $('#status-up-id').val(`${result.id}`)
         }
     })
 }
 
 function update() {
-    let valId = $('#department-up-id').val()
-    let valName = $('#department-up-name').val()
-    let valManager = $('.department-up-manager').val()
-    let valHr = $('.department-up-hr').val()
+    let valId = $('#status-up-id').val()
+    let valName = $('#status-up-name').val()
 
     Swal.fire({
         title: 'Are you sure?',
-        text: "Do you want to change this department!",
+        text: "Do you want to change this status!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -157,22 +110,16 @@ function update() {
         if (result.isConfirmed) {
             $.ajax({
                 method: "PUT",
-                url: "api/department/" + valId,
+                url: "api/status/" + valId,
                 dataType: "JSON",
                 beforeSend: addCsrfToken(),
                 contentType: "application/json",
                 data: JSON.stringify({
-                    name: valName,
-                    manager: {
-                        id: valManager
-                    },
-                    hr: {
-                        id: valHr
-                    }
+                    name: valName
                 }),
                 success: result => {
-                    $('#update-department').modal('hide')
-                    $('#department-table').DataTable().ajax.reload()
+                    $('#update-status').modal('hide')
+                    $('#status-table').DataTable().ajax.reload()
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
@@ -194,11 +141,11 @@ function update() {
     })
 }
 
-function departmentDelete(id) {
+function statusDelete(id) {
 
     Swal.fire({
         title: 'Are you sure?',
-        text: "You won't be delete this department!",
+        text: "You won't be delete this status!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -208,11 +155,11 @@ function departmentDelete(id) {
         if (result.isConfirmed) {
             $.ajax({
                 method: "DELETE",
-                url: "api/department/" + id,
+                url: "api/status/" + id,
                 dataType: "JSON",
                 beforeSend: addCsrfToken(),
                 success: result => {
-                    $('#department-table').DataTable().ajax.reload()
+                    $('#status-table').DataTable().ajax.reload()
                     Swal.fire({
                         title: 'Successfully to Delete',
                         width: 600,
@@ -221,7 +168,7 @@ function departmentDelete(id) {
                         background: '#fff',
                         backdrop: `
                             rgba(0,0,123,0.4)
-                            url("https://ask.libreoffice.org/uploads/asklibo/original/3X/3/5/35664d063435f940bda4cb3bb31ea0a6c5fed2f4.gif")
+                            url("https://media.tenor.com/3ksij76-6M4AAAAC/sarahs-scribbles-throw.gif")
                             left top
                             no-repeat
                         `,

@@ -17,7 +17,10 @@ $(document).ready(function () {
                 data: 'description'
             },
             {
-                data: 'status'
+                data: 'nominal'
+            },
+            {
+                data: 'name'
             },
             {
                 "data": null,

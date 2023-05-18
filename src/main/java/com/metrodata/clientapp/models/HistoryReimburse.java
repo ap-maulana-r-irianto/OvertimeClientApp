@@ -18,12 +18,9 @@ public class HistoryReimburse {
 
     private LocalDateTime date_time;
 
-    @NotBlank(message = "Invalid Status: Empty Status")
     private String status;
 
-    @NotBlank(message = "Invalid Description: Empty Description")
     private String description;
 
-    @NotNull(message = "Invalid Reimburse: Empty Reimburse")
     private Reimburse reimburse;
 }

@@ -14,11 +14,6 @@ $(document).ready(function () {
                 "data": null,
                 render: function (data, row, type, meta) {
                     return `
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detail-type"
-                        onclick="detail(${data.id})">
-                        <i class="bi bi-exclamation-circle-fill"></i>
-                    </button>
-
                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#update-type"
                         onclick="beforeUpdate(${data.id})">
                         <i class="bi bi-pencil-square"></i>
@@ -36,17 +31,6 @@ $(document).ready(function () {
     });
 });
 
-function detail(id) {
-    $.ajax({
-        method: "GET",
-        url: "api/type/" + id,
-        dataType: "JSON",
-        success: function (result) {
-            $('#type-det-id').val(`${result.id}`)
-            $('#type-det-name').val(`${result.name}`)
-        }
-    })
-}
 
 function create() {
     let valName = $('#type-in-name').val();

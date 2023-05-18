@@ -62,6 +62,51 @@ public class OvertimeService {
                 }).getBody();
     }
 
+    public Overtime approvManager(int id) {
+        return restTemplate.exchange(
+                url + "/approv/manager/" + id,
+                HttpMethod.PUT,
+                null,
+                new ParameterizedTypeReference<Overtime>() {
+                }).getBody();
+    }
+
+    public Overtime rejectManager(int id, String description) {
+        return restTemplate.exchange(
+                url + "/reject/manager/" + id,
+                HttpMethod.PUT,
+                new HttpEntity(description),
+                new ParameterizedTypeReference<Overtime>() {
+                }).getBody();
+    }
+
+    public Overtime approvHr(int id) {
+        return restTemplate.exchange(
+                url + "/approv/hr/" + id,
+                HttpMethod.PUT,
+                null,
+                new ParameterizedTypeReference<Overtime>() {
+                }).getBody();
+    }
+
+    public Overtime rejectHr(int id, String description) {
+        return restTemplate.exchange(
+                url + "/reject/hr/" + id,
+                HttpMethod.PUT,
+                new HttpEntity(description),
+                new ParameterizedTypeReference<Overtime>() {
+                }).getBody();
+    }
+
+    public Overtime paid(int id) {
+        return restTemplate.exchange(
+                url + "/paid/" + id,
+                HttpMethod.PUT,
+                null,
+                new ParameterizedTypeReference<Overtime>() {
+                }).getBody();
+    }
+
     public Overtime delete(int id) {
         return restTemplate.exchange(
                 url + "/" + id,

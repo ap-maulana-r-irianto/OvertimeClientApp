@@ -56,7 +56,7 @@ public class EmployeeController {
     @PutMapping("/{id}")
     public String update(@PathVariable int id, Employee employee){
        employeeService.update(id, employee);
-        return "redirect:/employee";
+        return "redirect:/home_employee";
     }
 
     @DeleteMapping("/{id}")

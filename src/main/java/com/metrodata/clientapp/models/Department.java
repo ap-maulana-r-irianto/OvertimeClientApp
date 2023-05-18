@@ -14,13 +14,10 @@ public class Department {
 
     private Integer id;
 
-    @NotBlank(message = "Invalid Name: Empty Name")
     private String name;
 
-    @NotNull(message = "Invalid Manager: Empty Manager")
     private Employee manager;
 
-    @NotNull(message = "Invalid Hr: Empty Hr")
     private Employee hr;
     
 }

@@ -15,14 +15,15 @@ public class Overtime {
 
     private Integer id;
 
-    @NotBlank(message = "Invalid Description: Empty Description")
+    private String nominal;
+
     private String description;
     
     private LocalDateTime start_time;
+
     private LocalDateTime end_time;
 
-    @NotBlank(message = "Invalid Status: Empty Status")
-    private String status;
+    private Status status;
     
     private EmployeeProject employeeProject;
     

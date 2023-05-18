@@ -11,10 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LoginRequest {
 
-    @NotBlank(message = "Invalid Username: Empty username")
     private String username;
 
-    @NotBlank(message = "Invalid Password: Empty password")
     private String password;
 
 }

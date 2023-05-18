@@ -8,6 +8,9 @@ $(document).ready(function () {
                 data: 'id'
             },
             {
+                data: 'name'
+            },
+            {
                 data: 'description'
             },
             {
@@ -17,20 +20,22 @@ $(document).ready(function () {
                 data: 'end_date'
             },
             {
-                data: 'budget'
+                data: function ( data, row, type, set ) {
+                    if ( data.status==false ) {
+                        return 'Not Active';
+                    }
+                    if ( data.status==true ) {
+                        return 'Active';
+                    }
+                }
             },
             {
-                data: 'status'
+                data: 'budget'
             },
             {
                 "data": null,
                 render: function (data, row, type, meta) {
                     return `
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detail-project"
-                        onclick="detail(${data.id})">
-                        <i class="bi bi-exclamation-circle-fill"></i>
-                    </button>
-
                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#update-project"
                         onclick="beforeUpdate(${data.id})">
                         <i class="bi bi-pencil-square"></i>
@@ -46,6 +51,7 @@ $(document).ready(function () {
             }
         ]
     });
+
 });
 
 function detail(id) {
@@ -70,7 +76,7 @@ function create() {
     let valStart_date = $('#project-in-start_date').val();
     let valsEnd_date = $('#project-in-end_date').val();
     let valBudget = $('#project-in-budget').val();
-    let valStatus = $('#project-in-status').val();
+    let valStatus = $('.project-in-status').val();
     $.ajax({
         method: "POST",
         url: "api/project",
@@ -114,13 +120,13 @@ function beforeUpdate(id) {
         url: "api/project/" + id,
         dataType: "JSON",
         success: function (result) {
+            $('#project-up-id').val(`${result.id}`)
             $('#project-up-name').val(`${result.name}`)
             $('#project-up-description').val(`${result.description}`)
             $('#project-up-start_date').val(`${result.start_date}`)
             $('#project-up-end_date').val(`${result.end_date}`)
             $('#project-up-budget').val(`${result.budget}`)
-            $('#project-up-status').val(`${result.status}`)
-            $('#project-up-id').val(`${result.id}`)
+            $('.project-up-status').val(`${result.status}`)
         }
     })
 }
@@ -132,7 +138,7 @@ function update() {
     let valStart_date = $('#project-up-start_date').val();
     let valsEnd_date = $('#project-up-end_date').val();
     let valBudget = $('#project-up-budget').val();
-    let valStatus = $('#project-up-status').val();
+    let valStatus = $('.project-up-status').val();
 
     Swal.fire({
         title: 'Are you sure?',

@@ -8,25 +8,15 @@ $(document).ready(function () {
                 data: 'id'
             },
             {
-                data: 'project.name'
+                data: 'employee.name'
             },
             {
-                data: 'employee.name'
+                data: 'project.name'
             },
             {
                 "data": null,
                 render: function (data, row, type, meta) {
                     return `
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detail-employeeproject"
-                        onclick="detail(${data.id})">
-                        <i class="bi bi-exclamation-circle-fill"></i>
-                    </button>
-
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#update-employeeproject"
-                        onclick="beforeUpdate(${data.id})">
-                        <i class="bi bi-pencil-square"></i>
-                    </button>
-
                     <button type="button" class="btn btn-danger"
                         onclick="employeeprojectDelete(${data.id})">
                         <i class="bi bi-trash3-fill"></i>
@@ -95,7 +85,6 @@ function detail(id) {
 }
 
 function create() {
-    let valName = $('#employeeproject-in-name').val();
     let valEmployee = $('.employeeproject-in-employee').val();
     let valProject = $('.employeeproject-in-project').val();
     $.ajax({
@@ -229,7 +218,7 @@ function employeeprojectDelete(id) {
                         background: '#fff',
                         backdrop: `
                             rgba(0,0,123,0.4)
-                            url("https://ask.libreoffice.org/uploads/asklibo/original/3X/3/5/35664d063435f940bda4cb3bb31ea0a6c5fed2f4.gif")
+                            url("https://media.tenor.com/3ksij76-6M4AAAAC/sarahs-scribbles-throw.gif")
                             left top
                             no-repeat
                         `,

@@ -13,9 +13,7 @@ public class EmployeeProject {
     
     private Integer id;
 
-    @NotNull(message = "Invalid Project: Empty Project")
     private Project project;
 
-    @NotNull(message = "Invalid Employee: Empty Employee")
     private Employee employee;
 }

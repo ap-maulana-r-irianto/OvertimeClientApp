@@ -44,6 +44,15 @@ public class UserService {
                 }).getBody();
     }
 
+    public User getByUsername(String username) {
+        return restTemplate.exchange(
+                url + "/username/" + username,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<User>() {
+                }).getBody();
+    }
+
     public User create(UserRequest userRequest) {
         return restTemplate.exchange(
                 url,

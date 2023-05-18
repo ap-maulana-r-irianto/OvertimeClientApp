@@ -1,122 +1,126 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+  <head th:replace="fragments/employee/sidebar :: head"></head>
 
-<head th:replace="fragments/employee/sidebar :: head"></head>
-
-<body>
+  <body>
     <div th:replace="fragments/employee/sidebar :: sidebar"></div>
     <section class="home-section">
-        <nav th:replace="fragments/employee/sidebar :: navbar"></nav>
-        <div class="home-content">
-            <div class="title">History Reimburse Submission</div>
-            <div class="sales-boxes">
-                <div class="recent-sales box">
-
-                    <table id="reimburse-table" class="table table-bordered table-striped">
-                        <thead class="table-light">
-                            <tr>
-                                <th class="col-1">No</th>
-                                <th class="col-2">Name</th>
-                                <th class="col-2">type</th>
-                                <th class="col-2">Date</th>
-                                <th class="col-2">Nominal</th>
-                                <th class="col-2">Description</th>
-                                <th class="col-2">Payment Slip</th>
-                                <th class="col-2">Status</th>
-                                <th class="col-2">Action</th>
-                            </tr>
-                        </thead>
-                    </table>
-                    <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                        data-bs-target="#create-reimburse">
-                        Reimburse Submission
-                    </button>
-                </div>
-            </div>
+      <nav th:replace="fragments/employee/sidebar :: navbar"></nav>
+      <div class="home-content">
+        <div class="title">History Reimburse Submission</div>
+        <div class="sales-boxes">
+          <div class="recent-sales box">
+            <table
+              id="reimburse-table"
+              class="table table-bordered table-striped"
+            >
+              <thead class="table-light">
+                <tr>
+                  <th class="col-2">No</th>
+                  <th class="col-2">Nominal</th>
+                  <th class="col-2">Description</th>
+                  <th class="col-2">Date Time</th>
+                  <th class="col-2">Type</th>
+                  <th class="col-2">File</th>
+                  <th class="col-2">Status</th>
+                  <th class="col-2">Employee</th>
+                </tr>
+              </thead>
+            </table>
+            <button
+              type="button"
+              class="btn btn-info"
+              data-bs-toggle="modal"
+              data-bs-target="#create-reimburse"
+            >
+              Reimburse Submission
+            </button>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Modal Create -->
-    <div class="modal fade" id="create-reimburse" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Reimburse Submission</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Type</label>
-                        <select class="form-select reimburse-in-type">
-                            <option value="0" disabled selected>Type</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Date</label>
-                        <input type="date" class="form-control" id="reimburse-up-date">
-                    </div>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Nominal</label>
-                        <input type="number" class="form-control" id="reimburse-up-nominal">
-                    </div>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Description</label>
-                        <input type="name" class="form-control" id="reimburse-up-description">
-                    </div>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Pay Slip</label>
-                        <input type="file" class="form-control" id="reimburse-up-file">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-info" onclick="create()">Submit</button>
-                </div>
+    <div
+      class="modal fade"
+      id="create-reimburse"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">
+              Reimburse Submission
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="name" class="form-label">Type</label>
+              <select class="form-select reimburse-in-type">
+                <option value="0" disabled selected>Select the Type!</option>
+              </select>
             </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Nominal</label>
+              <input
+                type="number"
+                class="form-control"
+                id="reimburse-in-nominal"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Description</label>
+              <input
+                type="name"
+                class="form-control"
+                id="reimburse-in-description"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Upload File</label>
+              <input
+                type="file"
+                class="form-control"
+                id="reimburse-in-file"
+              />
+            </div>
+            <input type="hidden" class="form-control" id="reimburse-in-employee" th:field="*{employee.id}">
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-info" onclick="create()">
+              Submit
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
-    <!-- Modal Update -->
-    <div class="modal fade" id="update-reimburse" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Update Overtime</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Type</label>
-                        <select class="reimburse-up-type">
-                            <option value="0" disabled selected>Type</option>
-                        </select>
-                        <label for="name" class="form-label">Date</label>
-                        <input type="text" class="form-control" id="reimburse-up-date" />
-                        <label for="name" class="form-label">Nominal</label>
-                        <input type="number" class="form-control" id="reimburse-up-nominal">
-                        <label for="name" class="form-label">Description</label>
-                        <input type="text" class="form-control" id="overtime-up-description" />
-                        <label for="name" class="form-label">Pay Slip</label>
-                        <input type="text" class="form-control" id="overtime-up-description" />
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="update()">submit</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- JQuery Script -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js">
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-        </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
 
     <!-- DataTables Script -->
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
@@ -124,9 +128,7 @@
     <!-- SweetAlert2 Script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
     <script th:src="@{/js/employee/reimburse.js}"></script>
     <div th:replace="fragments/employee/sidebar :: script"></div>
-</body>
-
+  </body>
 </html>

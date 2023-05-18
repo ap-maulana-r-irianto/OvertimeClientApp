@@ -14,38 +14,19 @@ $(document).ready(function () {
             data: 'description'
         },
         {
-            data: 'file'
-        },
-        {
-            data: 'status'
-        },
-        {
-            data: 'employee.name'
+            data: 'date_time'
         },
         {
             data: 'type.name'
         },
         {
-            "data": null,
-            render: function (data, row, type, meta) {
-                return `
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detail-reimburse"
-                        onclick="detail(${data.id})">
-                        <i class="bi bi-exclamation-circle-fill"></i>
-                    </button>
-
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#update-reimburse"
-                        onclick="beforeUpdate(${data.id})">
-                        <i class="bi bi-pencil-square"></i>
-                    </button>
-
-                    <button type="button" class="btn btn-danger"
-                        onclick="reimburseDelete(${data.id})">
-                        <i class="bi bi-trash3-fill"></i>
-                    </button>
-                    
-                    `;
-            }
+            data: 'file_url'
+        },
+        {
+            data: 'status.name'
+        },
+        {
+            data: 'employee.name'
         }
 
         ]
@@ -53,33 +34,12 @@ $(document).ready(function () {
 
     $.ajax({
         method: "GET",
-        url: "api/employee",
-        dataType: "JSON",
-        success: function (result) {
-            $.each(result, function (key, value) {
-                $('.reimburse-in-employee').append(
-                    '<option value="'
-                    + value.id
-                    + '">'
-                    + value.name
-                    + '</option>'
-                ),
-                    $('.reimpburse-up-eemployee').append(
-                        '<option value="'
-                        + value.id
-                        + '">'
-                        + value.name
-                        + '</option>'
-                    )
-            })
-        }
-    });
-
-    $.ajax({
-        method: "GET",
         url: "api/type",
         dataType: "JSON",
         success: function (result) {
+            // $('#overtime-in-employee').append(
+            //     '<option value="">Choose Your employee</option>'
+            // );
             $.each(result, function (key, value) {
                 $('.reimburse-in-type').append(
                     '<option value="'
@@ -87,28 +47,40 @@ $(document).ready(function () {
                     + '">'
                     + value.name
                     + '</option>'
-                ),
-                    $('.reimburse-up-type').append(
-                        '<option value="'
-                        + value.id
-                        + '">'
-                        + value.name
-                        + '</option>'
-                    )
+                )
             })
         }
-    });
+    })
 
+    $.ajax({
+        method: "GET",
+        url: "api/status",
+        dataType: "JSON",
+        success: function (result) {
+            // $('#overtime-in-employee').append(
+            //     '<option value="">Choose Your employee</option>'
+            // );
+            $.each(result, function (key, value) {
+                $('.reimburse-up-status').append(
+                    '<option value="'
+                    + value.id
+                    + '">'
+                    + value.name
+                    + '</option>'
+                )
+            })
+        }
+    })
 
 });
 
-
 function create() {
-    let valNominal = $('#reimburse-in-nominal').val();
-    let valDescription = $('#reimburse-in-description').val();
-    let valFile = $('#reimburse-in-file').val();
-    let valStatus = $('#reimburse-in-status').val();
-    let valType = $('.reimburse-in-type').val();
+    let valNominal = $('#reimburse-in-nominal').val()
+    let valDescription = $('#reimburse-in-description').val()
+    let valDateTime = $('#reimburse-in-date_time').val()
+    let valFile = $('#reimburse-in-file').val()
+    let valType = $('#reimburse-in-type').val()
+    let valEmployee = $('#reimburse-in-employee').val()
     $.ajax({
         method: "POST",
         url: "api/reimburse",
@@ -117,19 +89,22 @@ function create() {
         data: JSON.stringify({
             nominal: valNominal,
             description: valDescription,
-            file: valFile,
-            status: valStatus,
-            type: valType
+            date_time: valDateTime,
+            file_url: valFile,
+            type_id: valType,
+            employee: {
+                id: valEmployee
+            }
         }),
         contentType: "application/json",
         success: result => {
             console.log(result)
-            $('#create-reimburse').modal('hide')
-            $('#reimburse-table').DataTable().ajax.reload()
+            $('#create-project').modal('hide')
+            $('#project-table').DataTable().ajax.reload()
             Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: 'Pengajuan Reimburse Berhasil',
+                title: 'Successfully to insert',
                 showConfirmButton: false,
                 timer: 2000
             })
@@ -140,10 +115,9 @@ function create() {
                 icon: 'error',
                 title: 'Oops... Something went wrong!',
                 text: 'Please check the input fields, make sure nothing is empty!'
-            })
+              })
         }
     })
-
 }
 
 function beforeUpdate(id) {
@@ -155,10 +129,11 @@ function beforeUpdate(id) {
             $('#reimburse-up-id').val(`${result.id}`)
             $('#reimburse-up-nominal').val(`${result.nominal}`)
             $('#reimburse-up-description').val(`${result.description}`)
-            $('#reimburse-up-file').val(`${result.file}`)
-            $('#reimburse-up-status').val(`${result.status}`)
-            $('.reimburse-in-type').val(`${result.type.id}`)
-
+            $('#reimburse-up-date_time').val(`${result.date_time}`)
+            $('#reimburse-up-file').val(`${result.file_url}`)
+            $('#reimburse-up-type').val(`${result.type.id}`)
+            $('.reimburse-up-status').val(`${result.status.id}`)
+            $('#reimburse-up-employee').val(`${result.employee.id}`)
         }
     })
 }
@@ -167,13 +142,15 @@ function update() {
     let valId = $('#reimburse-up-id').val()
     let valNominal = $('#reimburse-up-nominal').val()
     let valDescription = $('#reimburse-up-description').val()
+    let valDateTime = $('#reimburse-up-date_time').val()
     let valFile = $('#reimburse-up-file').val()
-    let valStatus = $('#reimburse-up-status').val()
-    let valType = $('.reimburse-in-type').val()
+    let valType = $('#reimburse-up-type').val()
+    let valStatus = $('.reimburse-up-status').val()
+    let valEmployee = $('#reimburse-up-employee').val()
 
     Swal.fire({
         title: 'Are you sure?',
-        text: "Do you want to change this submission!",
+        text: "Do you want to approval this submission!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -190,9 +167,15 @@ function update() {
                 data: JSON.stringify({
                     nominal: valNominal,
                     description: valDescription,
-                    file: valFile,
-                    status: valStatus,
-                    type: valType
+                    date_time: valDateTime,
+                    file_url: valFile,
+                    type_id: valType,
+                    status: {
+                        id: valStatus
+                    },
+                    employee: {
+                        id: valEmployee
+                    }
                 }),
                 success: result => {
                     $('#update-reimburse').modal('hide')
@@ -214,65 +197,6 @@ function update() {
                     })
                 }
             })
-        }
-    })
-}
-
-function reimburseDelete(id) {
-
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be delete this reimburse!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                method: "DELETE",
-                url: "api/reimburse/" + id,
-                dataType: "JSON",
-                beforeSend: addCsrfToken(),
-                success: result => {
-                    $('#reimburse-table').DataTable().ajax.reload()
-                    Swal.fire({
-                        title: 'Successfully to Delete',
-                        width: 600,
-                        padding: '3em',
-                        color: '#716add',
-                        background: '#fff',
-                        backdrop: `
-                            rgba(0,0,123,0.4)
-                            url("https://ask.libreoffice.org/uploads/asklibo/original/3X/3/5/35664d063435f940bda4cb3bb31ea0a6c5fed2f4.gif")
-                            left top
-                            no-repeat
-                        `,
-                        icon: 'success',
-                        showConfirmButton: false,
-                        timer: 5000
-                    })
-                }
-            })
-        }
-    })
-
-}
-
-function detail(id) {
-    $.ajax({
-        method: "GET",
-        url: "api/reimburse/" + id,
-        dataType: "JSON",
-        success: function (result) {
-            $('#reimburse-det-id').val(`${result.id}`)
-            $('#reimburse-det-nominal').val(`${result.nominal}`)
-            $('#reimburse-det-description').val(`${result.description}`)
-            $('#reimburse-det-file').val(`${result.file}`)
-            $('#reimburse-det-status').val(`${result.status}`)
-            $('#reimburse-det-employee').val(`${result.employee.name}`)
-            $('#reimburse-det-type').val(`${result.type.name}`)
         }
     })
 }

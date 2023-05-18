@@ -35,7 +35,32 @@ public class ApiReimburseController {
 
     @PutMapping("/{id}")
     public Reimburse update(@PathVariable int id, @RequestBody Reimburse reimburse){
-        return reimburseService.update(id,reimburse);
+        return reimburseService.update(id, reimburse);
+    }
+
+    @PutMapping("/approv/manager/{id}")
+    public Reimburse approvManager(@PathVariable int id){
+        return reimburseService.approvManager(id);
+    }
+
+    @PutMapping("/reject/manager/{id}")
+    public Reimburse rejectManager(@PathVariable int id, @RequestBody String description){
+        return reimburseService.rejectManager(id, description);
+    }
+
+    @PutMapping("/approv/hr/{id}")
+    public Reimburse approvHr(@PathVariable int id){
+        return reimburseService.approvHr(id);
+    }
+
+    @PutMapping("/reject/hr/{id}")
+    public Reimburse rejectHr(@PathVariable int id, @RequestBody String description){
+        return reimburseService.rejectHr(id, description);
+    }
+
+    @PutMapping("/paid/{id}")
+    public Reimburse paid(@PathVariable int id){
+        return reimburseService.paid(id);
     }
 
     @DeleteMapping("/{id}")

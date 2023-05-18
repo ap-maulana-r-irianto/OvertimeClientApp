@@ -62,6 +62,51 @@ public class ReimburseService {
                 }).getBody();
     }
 
+    public Reimburse approvManager(int id) {
+        return restTemplate.exchange(
+                url + "/approv/manager/" + id,
+                HttpMethod.PUT,
+                null,
+                new ParameterizedTypeReference<Reimburse>() {
+                }).getBody();
+    }
+
+    public Reimburse rejectManager(int id, String description) {
+        return restTemplate.exchange(
+                url + "/reject/manager/" + id,
+                HttpMethod.PUT,
+                new HttpEntity(description),
+                new ParameterizedTypeReference<Reimburse>() {
+                }).getBody();
+    }
+
+    public Reimburse approvHr(int id) {
+        return restTemplate.exchange(
+                url + "/approv/hr/" + id,
+                HttpMethod.PUT,
+                null,
+                new ParameterizedTypeReference<Reimburse>() {
+                }).getBody();
+    }
+
+    public Reimburse rejectHr(int id, String description) {
+        return restTemplate.exchange(
+                url + "/reject/hr/" + id,
+                HttpMethod.PUT,
+                new HttpEntity(description),
+                new ParameterizedTypeReference<Reimburse>() {
+                }).getBody();
+    }
+
+    public Reimburse paid(int id) {
+        return restTemplate.exchange(
+                url + "/paid/" + id,
+                HttpMethod.PUT,
+                null,
+                new ParameterizedTypeReference<Reimburse>() {
+                }).getBody();
+    }
+
     public Reimburse delete(int id) {
         return restTemplate.exchange(
                 url + "/" + id,

@@ -1,45 +1,98 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+  <head th:replace="fragments/hr/sidebar :: head"></head>
 
-<head th:replace="fragments/hr/sidebar :: head"></head>
-
-<body>
+  <body>
     <div th:replace="fragments/hr/sidebar :: sidebar"></div>
     <section class="home-section">
-        <nav th:replace="fragments/hr/sidebar :: navbar"></nav>
+      <nav th:replace="fragments/hr/sidebar :: navbar"></nav>
 
-        <div class="home-content">
-            <div class="title">History Overtime</div>
-            <div class="sales-boxes">
-                <div class="recent-sales box">
-                    <table id="overtime-table" class="table table-bordered table-striped">
-                        <thead class="table-light">
-                            <tr>
-                                <th class="col-2">No</th>
-                                <th class="col-2">Name</th>
-                                <th class="col-2">Start Time</th>
-                                <th class="col-2">End Time</th>
-                                <th class="col-2">Description</th>
-                                <th class="col-2">Status</th>
-                                <th class="col-5">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
+      <div class="home-content">
+        <div class="title">History Overtime</div>
+        <div class="sales-boxes">
+          <div class="recent-sales box">
+            <table
+              id="overtime-table"
+              class="table table-bordered table-striped"
+            >
+              <thead class="table-light">
+                <tr>
+                  <th class="col-2">Id</th>
+                  <th class="col-2">Nominal</th>
+                  <th class="col-2">Description</th>
+                  <th class="col-2">Start Time</th>
+                  <th class="col-2">End Time</th>
+                  <th class="col-2">Status</th>
+                  <th class="col-2">Employee</th>
+                  <th class="col-2">Project</th>
+                  <th class="col-2">Action</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
         </div>
+      </div>
     </section>
-     <!-- JQuery Script -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js">
-    </script>
+
+    <!-- Modal Update -->
+    <div
+      class="modal fade"
+      id="update-overtime"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Approval Overtime</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="name" class="form-label">Status</label>
+              <select class="form-select overtime-up-status">
+              </select>
+              <input type="hidden" class="form-control" id="overtime-up-id" />
+              <input type="hidden" class="form-control" id="overtime-up-nominal" />
+              <input type="hidden" class="form-control" id="overtime-up-description" />
+              <input type="hidden" class="form-control" id="overtime-up-start_time" />
+              <input type="hidden" class="form-control" id="overtime-up-end_time" />
+              <input type="hidden" class="form-control" id="overtime-up-employee_project" />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-info" onclick="update()">
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JQuery Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-        </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
 
     <!-- DataTables Script -->
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
@@ -47,9 +100,7 @@
     <!-- SweetAlert2 Script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
-    <script th:src="@{/js/employee/overtime.js}"></script>
+    <script th:src="@{/js/hr/overtime.js}"></script>
     <div th:replace="fragments/hr/sidebar :: script"></div>
-</body>
-
+  </body>
 </html>

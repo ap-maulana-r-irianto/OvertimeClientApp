@@ -15,18 +15,16 @@
                     <table id="project-table" class="table table-bordered table-striped">
                         <thead class="table-light">
                             <tr>
-                                <th class="col-1">No</th>
-                                <th class="col-2">Project</th>
+                                <th class="col-1">Id</th>
+                                <th class="col-2">Name</th>
+                                <th class="col-2">Description</th>
                                 <th class="col-2">Start Date</th>
                                 <th class="col-2">End Date</th>
-                                <th class="col-5">Description</th>
-                                <th class="col-5">Budget</th>
-                                <th class="col-2">Status</th>
+                                <th class="col-1">Status</th>
+                                <th class="col-2">Budget</th>
                                 <th class="col-2">Action</th>
-
                             </tr>
                         </thead>
-
                     </table>
                     <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#create-project">
                         Add Project
@@ -44,29 +42,37 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Add Department</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Add Project</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Project</label>
+                        <label for="name" class="form-label">Name</label>
                         <input type="name" class="form-control" id="project-in-name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Start Date</label>
-                        <input type="name" class="form-control" id="project-in-start_date">
-                    </div>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">End Date</label>
-                        <input type="name" class="form-control" id="project-in-end_date">
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Description</label>
                         <input type="name" class="form-control" id="project-in-description">
                     </div>
                     <div class="mb-3">
+                        <label for="name" class="form-label">Start Date</label>
+                        <input type="date" class="form-control" id="project-in-start_date">
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">End Date</label>
+                        <input type="date" class="form-control" id="project-in-end_date">
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Status</label>
+                        <select class="form-select project-in-status">
+                            <option value="0" disabled selected>Select the Status!</option>
+                            <option value="false">Not Active</option>
+                            <option value="true">Active</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="name" class="form-label">Budget</label>
-                        <input type="name" class="form-control" id="project-in-budget">
+                        <input type="number" class="form-control" id="project-in-budget">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -78,34 +84,43 @@
     </div>
 
     <!-- Modal Update -->
-    <div class="modal fade" id="create-project" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="update-project" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Add Department</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Update Project</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <input type="hidden" class="form-control" id="project-up-id">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Project</label>
+                        <label for="name" class="form-label">Name</label>
                         <input type="name" class="form-control" id="project-up-name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Start Date</label>
-                        <input type="name" class="form-control" id="project-up-start_date">
-                    </div>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">End Date</label>
-                        <input type="name" class="form-control" id="project-up-end_date">
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Description</label>
                         <input type="name" class="form-control" id="project-up-description">
                     </div>
                     <div class="mb-3">
+                        <label for="name" class="form-label">Start Date</label>
+                        <input type="date" class="form-control" id="project-up-start_date">
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">End Date</label>
+                        <input type="date" class="form-control" id="project-up-end_date">
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Status</label>
+                        <select class="form-select project-up-status">
+                            <option value="0" disabled selected>Select the Status!</option>
+                            <option value="false">Not Active</option>
+                            <option value="true">Active</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="name" class="form-label">Budget</label>
-                        <input type="name" class="form-control" id="project-up-budget">
+                        <input type="number" class="form-control" id="project-up-budget">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -115,6 +130,7 @@
             </div>
         </div>
     </div>
+
       <!-- JQuery Script -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js">
     </script>

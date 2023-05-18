@@ -15,17 +15,12 @@
                     <table id="employeeproject-table" class="table table-bordered table-striped">
                         <thead class="table-light">
                         <tr>
-                            <th class="col-1">No</th>
-                            <th class="col-1">Employee</th>
-                            <th class="col-1">Project</th>
-                            <th class="col-1">Start Date</th>
-                            <th class="col-1">End Date</th>
-                            <th class="col-1">Description</th>
-                            <th class="col-1">Status</th>
+                            <th class="col-1">Id</th>
+                            <th class="col-3">Employee</th>
+                            <th class="col-3">Project</th>
                             <th class="col-1">Action</th>
                         </tr>
                     </thead>
-                        <tbody>
                     </table>
                     <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#create-employee-project">
                         Add Employee Project
@@ -37,7 +32,7 @@
     </section>
 
     <!-- Modal Create -->
-    <div class="modal fade" id="create-employee-project" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="create-employeeproject" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -58,33 +53,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-info" onclick="create()">Submit</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Update -->
-    <div class="modal fade" id="update-employeeproject" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Add Department</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <label for="name" class="form-label">Employee</label>
-                    <select class="form-select employeeproject-up-employee">
-                        <option value="0" disabled selected>Choose Employee</option>
-                    </select>
-                    <label for="name" class="form-label">Project</label>
-                    <select class="form-select employeeproject-up-project">
-                        <option value="0" disabled selected>Choose Project</option>
-                    </select>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-info" onclick="update()">Submit</button>
                 </div>
             </div>
         </div>

@@ -1,5 +1,7 @@
 package com.metrodata.clientapp.models;
 
+import java.util.List;
+
 import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
@@ -13,7 +15,8 @@ public class Role {
 
     private Integer id;
 
-    @NotBlank(message = "Invalid Employee: Empty Employee")
     private String name;
+
+    private List<Privilege> privilege;
     
 }

@@ -1,5 +1,7 @@
 package com.metrodata.clientapp.models;
 
+import java.time.LocalDateTime;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -13,21 +15,19 @@ import lombok.NoArgsConstructor;
 public class Reimburse {
 
     private Integer id;
+
     private int nominal;
 
-    @NotBlank(message = "Invalid Description: Empty Description")
     private String description;
 
-    @NotBlank(message = "Invalid File: Empty File")
-    private String file;
+    private LocalDateTime date_time;
+    
+    private String file_url;
 
-    @NotBlank(message = "Invalid Status: Empty Status")
-    private String status;
+    private Status status;
 
-    @NotNull(message = "Invalid Employee: Empty Employee")
     private Employee employee;
 
-    @NotNull(message = "Invalid Type: Empty Type")
     private Type type;
     
 }

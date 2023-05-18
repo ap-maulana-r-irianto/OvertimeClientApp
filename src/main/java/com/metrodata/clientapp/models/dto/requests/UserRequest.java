@@ -11,21 +11,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserRequest {
 
-    @NotBlank(message = "Invalid Name: Empty name")
     private String name;
 
-    @NotBlank(message = "Invalid Email: Empty email")
-    private String email;
-
-    @NotBlank(message = "Invalid Phone: Empty phone")
     private String phone;
-
-    @NotBlank(message = "Invalid Username: Empty username")
+    
+    private String email;
+    
+    private String account_bank;
+    
     private String username;
-
-    @NotBlank(message = "Invalid Password: Empty Password")
+    
     private String password;
-
-    @NotBlank(message = "Invalid Department ID: Empty Department ID")
-    private Integer departmentId;
+    
+    private Integer role_id;
+    
+    private Integer department_id;
+    
+    private Integer manager_id;
 }

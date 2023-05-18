@@ -16,10 +16,6 @@ $(document).ready(function () {
             {
                 data: 'phone'
             },
-            //  
-            {
-                data: 'department.name'
-            },
             {
                 "data": null,
                 render: function (data, row, type, meta) {
@@ -68,6 +64,47 @@ $(document).ready(function () {
             })
         }
     });
+
+    $.ajax({
+        method: "GET",
+        url: "api/employee",
+        dataType: "JSON",
+        success: function (result) {
+            $.each(result, function(key, value) {
+                $('.employee-in-manager').append(
+                    '<option value="'
+                                 + value.id
+                                 + '">'
+                                 + value.name
+                                 + '</option>'
+                ),
+                $('.employee-up-manager').append(
+                    '<option value="'
+                                 + value.id
+                                 + '">'
+                                 + value.name
+                                 + '</option>'
+                )
+            })
+        }
+    });
+
+    $.ajax({
+        method: "GET",
+        url: "api/role",
+        dataType: "JSON",
+        success: function (result) {
+            $.each(result, function(key, value) {
+                $('.employee-in-role').append(
+                    '<option value="'
+                                 + value.id
+                                 + '">'
+                                 + value.name
+                                 + '</option>'
+                )
+            })
+        }
+    });
 });
 
 function detail(id) {
@@ -81,7 +118,10 @@ function detail(id) {
             $('#employee-det-email').val(`${result.email}`)
             $('#employee-det-phone').val(`${result.phone}`)
             $('#employee-det-payroll').val(`${result.payroll}`)
+            $('#employee-det-account').val(`${result.account_bank}`)
+            $('#employee-det-username').val(`${result.user.username}`)
             $('#employee-det-department').val(`${result.department.name}`)
+            $('#employee-det-manager').val(`${result.employee.name}`)
         }
     })
 }
@@ -90,25 +130,27 @@ function create() {
     let valName = $('#employee-in-name').val();
     let valEmail = $('#employee-in-email').val();
     let valPhone = $('#employee-in-phone').val();
-    let valPayroll = $('#employee-in-payroll').val();
+    let valUsername = $('#employee-in-username').val();
+    let valPassword = $('#employee-in-password').val();
+    let valAccount = $('#employee-in-account').val();
     let valDepartment = $('.employee-in-department').val();
-    // let valUsername = $('#employee-in-username').val();
-    // let valPassword = $('#employee-in-password').val();
+    let valRole = $('.employee-in-role').val();
+    let valManager = $('.employee-in-manager').val();
     $.ajax({
         method: "POST",
-        url: "api/register",
+        url: "api/user",
         dataType: "JSON",
         beforeSend: addCsrfToken(),
         data: JSON.stringify({
             name: valName,
             email: valEmail,
             phone: valPhone,
-            payroll: valPayroll,
-            department: {
-                id: valDepartment
-            }
-            // username: valUsername,
-            // password: valPassword
+            account_bank: valAccount,
+            username: valUsername,
+            password: valPassword,
+            department_id: valDepartment,
+            manager_id: valManager,
+            role_id: valRole
         }),
         contentType: "application/json",
         success: result => {
@@ -140,14 +182,14 @@ function beforeUpdate(id) {
         url: "api/employee/" + id,
         dataType: "JSON",
         success: function (result) {
+            $('#employee-up-id').val(`${result.id}`)
             $('#employee-up-name').val(`${result.name}`)
             $('#employee-up-email').val(`${result.email}`)
             $('#employee-up-phone').val(`${result.phone}`)
+            $('#employee-up-account').val(`${result.account_bank}`)
             $('#employee-up-payroll').val(`${result.payroll}`)
-            $('.employee-in-department').val(`${result.department.id}`)
-            // $('#employee-up-username').val(`${result.username}`)
-            // $('#employee-up-password').val(`${result.password}`)
-            $('#employee-up-id').val(`${result.id}`)
+            $('.employee-up-department').val(`${result.department.id}`)
+            $('.employee-up-manager').val(`${result.employee.id}`)
         }
     })
 }
@@ -157,10 +199,10 @@ function update() {
     let valName = $('#employee-up-name').val()
     let valEmail = $('#employee-up-email').val()
     let valPhone = $('#employee-up-phone').val()
+    let valAccount = $('#employee-up-account').val()
     let valPayroll = $('#employee-up-payroll').val()
     let valDepartment = $('.employee-up-department').val()
-    // let valUsername = $('#employee-up-username').val()
-    // let valPassword = $('#employee-up-password').val()
+    let valManager = $('.employee-up-manager').val()
     Swal.fire({
         title: 'Are you sure?',
         text: "Do you want to change this employee!",
@@ -181,13 +223,14 @@ function update() {
                     name: valName,
                     email: valEmail,
                     phone: valPhone,
+                    account_bank: valAccount,
                     payroll: valPayroll,
                     department: {
                         id: valDepartment
+                    },
+                    manager: {
+                        id: valManager
                     }
-                    // username: valUsername,
-                    // password: valPassword
-
                 }),
                 success: result => {
                     $('#update-employee').modal('hide')
@@ -240,7 +283,7 @@ function employeeDelete(id) {
                         background: '#fff',
                         backdrop: `
                             rgba(0,0,123,0.4)
-                            url("https://ask.libreoffice.org/uploads/asklibo/original/3X/3/5/35664d063435f940bda4cb3bb31ea0a6c5fed2f4.gif")
+                            url("https://media.tenor.com/3ksij76-6M4AAAAC/sarahs-scribbles-throw.gif")
                             left top
                             no-repeat
                         `,

@@ -8,60 +8,67 @@ $(document).ready(function () {
                 data: 'id'
             },
             {
+                data: 'nominal'
+            },
+            {
+                data: 'description'
+            },
+            {
                 data: 'start_time'
             },
             {
                 data: 'end_time'
             },
             {
-                data: 'description'
+                data: 'status.name'
             },
             {
-                data: 'status'
+                data: 'employeeProject.employee.name'
             },
             {
-                "data": null,
-                render: function (data, row, type, meta) {
-                    return `
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detail-overtime"
-                        onclick="detail(${data.id})">
-                        <i class="bi bi-exclamation-circle-fill"></i>
-                    </button>
-
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#update-overtime"
-                        onclick="beforeUpdate(${data.id})">
-                        <i class="bi bi-pencil-square"></i>
-                    </button>
-
-                    <button type="button" class="btn btn-danger"
-                        onclick="overtimeDelete(${data.id})">
-                        <i class="bi bi-trash3-fill"></i>
-                    </button>
-                    
-                    `;
-                }
+                data: 'employeeProject.project.name'
             }
 
         ]
     });
 
+    $.ajax({
+        method: "GET",
+        url: "api/status",
+        dataType: "JSON",
+        success: function (result) {
+            // $('#overtime-in-employee').append(
+            //     '<option value="">Choose Your employee</option>'
+            // );
+            $.each(result, function (key, value) {
+                $('.overtime-up-status').append(
+                    '<option value="'
+                    + value.id
+                    + '">'
+                    + value.name
+                    + '</option>'
+                )
+            })
+        }
+    })
   
 });
 
-
 function create() {
-    let valStart_time = $('#overtime-in-start_time').val();
-    let valEnd_time = $('#overtime-in-end_time').val();
-    let valDescription = $('#overtime-in-description').val();
+    let valDescription = $('#overtime-in-description').val()
+    let valStart_time = $('#overtime-in-start_time').val()
+    let valEnd_time = $('#overtime-in-end_time').val()
+    let valEmployeeProject = 6
     $.ajax({
         method: "POST",
         url: "api/overtime",
         dataType: "JSON",
         beforeSend: addCsrfToken(),
         data: JSON.stringify({
+            description: valDescription,
             start_time: valStart_time,
             end_time: valEnd_time,
-            description: valDescription
+            employee_project_id: valEmployeeProject
         }),
         contentType: "application/json",
         success: result => {
@@ -71,7 +78,7 @@ function create() {
             Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: 'Pengajuan Overtime Berhasil',
+                title: 'Successfully to insert',
                 showConfirmButton: false,
                 timer: 2000
             })
@@ -85,32 +92,37 @@ function create() {
               })
         }
     })
-
 }
 
 function beforeUpdate(id) {
     $.ajax({
         method: "GET",
-        url: "api/overtim e/" + id,
+        url: "api/overtime/" + id,
         dataType: "JSON",
         success: function (result) {
             $('#overtime-up-id').val(`${result.id}`)
+            $('#overtime-up-nominal').val(`${result.nominal}`)
+            $('#overtime-up-description').val(`${result.description}`)
             $('#overtime-up-start_time').val(`${result.start_time}`)
             $('#overtime-up-end_time').val(`${result.end_time}`)
-            $('#overtime-up-description').val(`${result.description}`)
+            $('.overtime-up-status').val(`${result.status.id}`)
+            $('#overtime-up-employee_project').val(`${result.employee_project.id}`)
         }
     })
 }
 
 function update() {
     let valId = $('#overtime-up-id').val()
+    let valNominal = $('#overtime-up-nominal').val()
+    let valDescription = $('#overtime-up-description').val()
     let valStart_time = $('#overtime-up-start_time').val()
     let valEnd_time = $('#overtime-up-end_time').val()
-    let valDescription = $('#overtime-up-description').val()
+    let valStatus = $('.overtime-up-status').val()
+    let valEmployeeProject = $('#overtime-up-employee_project').val()
 
     Swal.fire({
         title: 'Are you sure?',
-        text: "Do you want to change this submission!",
+        text: "Do you want to approval this submission!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -125,9 +137,16 @@ function update() {
                 beforeSend: addCsrfToken(),
                 contentType: "application/json",
                 data: JSON.stringify({
+                    nominal: valNominal,
+                    description: valDescription,
                     start_time: valStart_time,
                     end_time: valEnd_time,
-                    description: valDescription
+                    status: {
+                        id: valStatus
+                    },
+                    employeeProject: {
+                        id: valEmployeeProject
+                    }
                 }),
                 success: result => {
                     $('#update-overtime').modal('hide')
@@ -149,63 +168,6 @@ function update() {
                       })
                 }
             })
-        }
-    })
-}
-
-function overtimeDelete(id) {
-
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be delete this overtime!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                method: "DELETE",
-                url: "api/overtime/" + id,
-                dataType: "JSON",
-                beforeSend: addCsrfToken(),
-                success: result => {
-                    $('#overtime-table').DataTable().ajax.reload()
-                    Swal.fire({
-                        title: 'Successfully to Delete',
-                        width: 600,
-                        padding: '3em',
-                        color: '#716add',
-                        background: '#fff',
-                        backdrop: `
-                            rgba(0,0,123,0.4)
-                            url("https://ask.libreoffice.org/uploads/asklibo/original/3X/3/5/35664d063435f940bda4cb3bb31ea0a6c5fed2f4.gif")
-                            left top
-                            no-repeat
-                        `,
-                        icon: 'success',
-                        showConfirmButton: false,
-                        timer: 5000
-                    })
-                }
-            })
-        }
-    })
-
-}
-
-function detail(id) {
-    $.ajax({
-        method: "GET",
-        url: "api/overtime/" + id,
-        dataType: "JSON",
-        success: function (result) {
-            $('#overtime-det-id').val(`${result.id}`)
-            $('#overtime-det-start_time').val(`${result.start_time}`)
-            $('#overtime-det-end_time').val(`${result.end_time}`)
-            $('#overtime-det-status').val(`${result.status}`)
-            $('#overtime-det-description').val(`${result.description}`)
         }
     })
 }

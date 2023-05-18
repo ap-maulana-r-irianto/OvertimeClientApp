@@ -15,8 +15,9 @@
                     <table id="type-table" class="table table-bordered table-striped">
                         <thead class="table-light">
                             <tr>
-                                <th class="col-1">No</th>
-                                <th class="col-2">Reimburse Type</th>
+                                <th class="col-1">Id</th>
+                                <th class="col-4">Reimburse Type</th>
+                                <th class="col-1">Action</th>
                             </tr>
                         </thead>
                     </table>
@@ -42,7 +43,7 @@
          <div class="modal-body">
              <div class="mb-3">
                  <label for="name" class="form-label">Type</label>
-                 <input type="name" class="form-control" id="type-in-name">
+                 <input type="text" class="form-control" id="type-in-name">
              </div>
          </div>
          <div class="modal-footer">
@@ -59,13 +60,14 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Add Type</h5>
+            <h5 class="modal-title" id="staticBackdropLabel">Update Type</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <div class="mb-3">
                 <label for="name" class="form-label">Type</label>
-                <input type="name" class="form-control" id="type-up-name">
+                <input type="text" class="form-control" id="type-up-name">
+                <input type="hidden" class="form-control" id="type-up-id">
             </div>
         </div>
         <div class="modal-footer">

@@ -14,16 +14,20 @@ public class Employee {
 
     private Integer id;
 
-    @NotBlank(message = "Invalid Name: Empty Name")
     private String name;
 
-    @NotBlank(message = "Invalid Phone: Empty Phone")
     private String phone;
 
-    @NotBlank(message = "Invalid Email: Empty Email")
     private String email;
 
-    @NotNull(message = "Invalid Department: Empty Department")
+    private String account_bank;
+
+    private Integer payroll;
+
     private Department department;
+
+    private Employee manager;
+
+    private User user;
     
 }

@@ -1,63 +1,281 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+  <head th:replace="fragments/hr/sidebar :: head"></head>
 
-<head th:replace="fragments/hr/sidebar :: head"></head>
-
-<body>
+  <body>
     <div th:replace="fragments/hr/sidebar :: sidebar"></div>
     <section class="home-section">
-        <nav th:replace="fragments/hr/sidebar :: navbar"></nav>
+      <nav th:replace="fragments/hr/sidebar :: navbar"></nav>
 
-        <div class="home-content">
-            <div class="title">Employee</div>
-            <div class="sales-boxes">
-                <div class="recent-sales box">
-                    <table id="employee-table" class="table table-bordered table-striped">
-                        <thead class="table-light">
-                            <tr>
-                                <th class="col-2">No</th>
-                                <th class="col-2">Department</th>
-                                <th class="col-2">Name</th>
-                                <th class="col-2">Phone</th>
-                                <th class="col-2">Email</th>
-                                <th class="col-2">Status</th>
-                                <th class="col-2">Payroll</th>
-                                <th class="col-5">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="employee : ${employee}">
-                                <td th:text="${employee.id}"></td>
-                                <td th:text="${employee.department.name}"></td>
-                                <td th:text="${employee.name}"></td>
-                                <td th:text="${employee.phone}"></td>
-                                <td th:text="${employee.email}"></td>
-                                <td th:text="${employee.status}"></td>
-                                <td th:text="${employee.payroll}"></td>
-                                <td class="d-flex align-items-center gap-4">
-                                    <a th:href="@{/hr/update/{id} (id=${employee.id})}"
-                                        class="btn btn-warning px-5 fw-bold">Edit</a>
-                                    <form th:action="@{/employee/{id} (id=${employee.id})}" th:method="DELETE">
-                                        <button type="submit" class="btn btn-danger px-5 fw-bold"
-                                            onclick="return confirm('Are you sure want to delete thiss!!!')">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <a th:href="@{/hr/add_employee}" class="btn btn-info">Add Employee</a>
-                </div>
-            </div>
+      <div class="home-content">
+        <div class="title">Employee</div>
+        <div class="sales-boxes">
+          <div class="recent-sales box">
+            <table
+              id="employee-table"
+              class="table table-bordered table-striped"
+            >
+              <thead class="table-light">
+                <tr>
+                  <th class="col-1">Id</th>
+                  <th class="col-3">Name</th>
+                  <th class="col-3">Phone</th>
+                  <th class="col-2">Email</th>
+                  <th class="col-2">Action</th>
+                </tr>
+              </thead>
+            </table>
+            <button
+              type="button"
+              class="btn btn-info"
+              data-bs-toggle="modal"
+              data-bs-target="#create-employee"
+            >
+              Add Employee
+            </button>
+          </div>
         </div>
+      </div>
     </section>
+
+    <!-- Modal Detail -->
+    <div
+      class="modal fade"
+      id="detail-employee"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Detail Employee</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="employee-det-name" readonly/>
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Email</label>
+              <input type="email" class="form-control" id="employee-det-email"readonly/>
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Phone</label>
+              <input type="text" class="form-control" id="employee-det-phone" readonly/>
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Payroll</label>
+              <input type="text" class="form-control" id="employee-det-payroll" readonly/>
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Account Bank</label>
+              <input type="text" class="form-control" id="employee-det-account" readonly/>
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Username</label>
+              <input type="text" class="form-control" id="employee-det-username" readonly/>
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Department</label>
+              <input type="text" class="form-control" id="employee-det-department" readonly/>
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Role</label>
+              <input type="text" class="form-control" id="employee-det-role" readonly/>
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Manager</label>
+              <input type="text" class="form-control" id="employee-det-manager" readonly/>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Create -->
+    <div
+      class="modal fade"
+      id="create-employee"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Add Employee</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="employee-in-name" />
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Email</label>
+              <input type="text" class="form-control" id="employee-in-email" />
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Phone</label>
+              <input type="text" class="form-control" id="employee-in-phone" />
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Account Bank</label>
+              <input type="text" class="form-control" id="employee-in-account" />
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Username</label>
+              <input type="text" class="form-control" id="employee-in-username" />
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Password</label>
+              <input type="password" class="form-control" id="employee-in-password" />
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Department</label>
+              <select class="form-select employee-in-department">
+                <option value="none" disabled selected>Select the Department!</option>
+                <option value="none">None</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Role</label>
+              <select class="form-select employee-in-role">
+                <option value="none" disabled selected>Select the Role!</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Manager</label>
+              <select class="form-select employee-in-manager">
+                <option value="none" disabled selected>Select the Manager!</option>
+                <option value="none">None</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-info" onclick="create()">
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Update -->
+    <div
+      class="modal fade"
+      id="update-employee"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Update Employee</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="employee-up-name" />
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Email</label>
+              <input type="email" class="form-control" id="employee-up-email" />
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Phone</label>
+              <input type="text" class="form-control" id="employee-up-phone" />
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Account Bank</label>
+              <input type="email" class="form-control" id="employee-up-account" />
+              <input type="hidden" d="employee-up-payroll">
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Department</label>
+              <select class="form-select employee-up-department">
+                <option value="none">None</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Manager</label>
+              <select class="form-select employee-up-manager">
+                <option value="none">None</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-info" onclick="update()">
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JQuery Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-        </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <!-- DataTables Script -->
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
+    <!-- SweetAlert2 Script -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script th:src="@{/js/hr/employee.js}"></script>
     <div th:replace="fragments/hr/sidebar :: script"></div>
-
-</body>
-
+  </body>
 </html>

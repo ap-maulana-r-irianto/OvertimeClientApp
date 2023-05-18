@@ -8,39 +8,44 @@ $(document).ready(function () {
                 data: 'id'
             },
             {
+                data: 'nominal'
+            },
+            {
+                data: 'description'
+            },
+            {
                 data: 'start_time'
             },
             {
                 data: 'end_time'
             },
             {
-                data: 'description'
+                data: 'status.name'
             },
             {
-                data: 'status'
+                data: 'employeeProject.employee.name'
             },
             {
-                data: 'employee.name'
+                data: 'employeeProject.project.name'
             },
             {
                 "data": null,
                 render: function (data, row, type, meta) {
                     return `
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detail-overtime"
-                        onclick="detail(${data.id})">
-                        <i class="bi bi-exclamation-circle-fill"></i>
-                    </button>
-
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#update-overtime"
-                        onclick="beforeUpdate(${data.id})">
+                    <button type="button" class="btn btn-warning"
+                        onclick="approv(${data.id})">
                         <i class="bi bi-pencil-square"></i>
                     </button>
 
-                    <button type="button" class="btn btn-danger"
-                        onclick="overtimeDelete(${data.id})">
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reject-overtime"
+                        onclick="beforeReject(${data.id})">
                         <i class="bi bi-trash3-fill"></i>
                     </button>
-                    
+
+                    <button type="button" class="btn btn-primary"
+                        onclick="paid(${data.id})">
+                        <i class="bi bi-trash3-fill"></i>
+                    </button>
                     `;
                 }
             }
@@ -48,99 +53,26 @@ $(document).ready(function () {
         ]
     });
 
-    $.ajax({
-        method: "GET",
-        url: "api/employee",
-        dataType: "JSON",
-        success: function (result) {
-            // $('#overtime-in-employee').append(
-            //     '<option value="">Choose Your employee</option>'
-            // );
-            $.each(result, function (key, value) {
-                $('.overtime-in-employee').append(
-                    '<option value="'
-                    + value.id
-                    + '">'
-                    + value.name
-                    + '</option>'
-                )
-            })
-        }
-    })
-  
 });
 
-
-function create() {
-    let valStart_time = $('#overtime-in-start_time').val();
-    let valEnd_time = $('#overtime-in-end_time').val();
-    let valDescription = $('#overtime-in-description').val();
-    let valStatus = $('#overtime-in-status').val();
-    let valEmployee = $('.overtime-in-employee').val();
-    $.ajax({
-        method: "POST",
-        url: "api/overtime",
-        dataType: "JSON",
-        beforeSend: addCsrfToken(),
-        data: JSON.stringify({
-            start_time: valStart_time,
-            end_time: valEnd_time,
-            description: valDescription,
-            status: valStatus,
-            employee: valEmployee
-        }),
-        contentType: "application/json",
-        success: result => {
-            console.log(result)
-            $('#create-overtime').modal('hide')
-            $('#overtime-table').DataTable().ajax.reload()
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Pengajuan Overtime Berhasil',
-                showConfirmButton: false,
-                timer: 2000
-            })
-        },
-        error: (result) => {
-            console.log(result)
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops... Something went wrong!',
-                text: 'Please check the input fields, make sure nothing is empty!'
-              })
-        }
-    })
-
-}
-
-function beforeUpdate(id) {
+function beforeReject(id) {
     $.ajax({
         method: "GET",
         url: "api/overtime/" + id,
         dataType: "JSON",
         success: function (result) {
             $('#overtime-up-id').val(`${result.id}`)
-            $('#overtime-up-start_time').val(`${result.start_time}`)
-            $('#overtime-up-end_time').val(`${result.end_time}`)
-            $('#overtime-up-description').val(`${result.description}`)
-            $('#overtime-up-status').val(`${result.status}`)
-            $('.overtime-in-employee').val(`${result.employee.name}`)
         }
     })
 }
 
-function update() {
+function reject() {
     let valId = $('#overtime-up-id').val()
-    let valStart_time = $('#overtime-up-start_time').val()
-    let valEnd_time = $('#overtime-up-end_time').val()
     let valDescription = $('#overtime-up-description').val()
-    let valStatus= $('#overtime-up-status').val()
-    let valEmployee = $('#overtime-in-employee').val()
 
     Swal.fire({
         title: 'Are you sure?',
-        text: "Do you want to change this submission!",
+        text: "Do you want to reject this submission!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -150,24 +82,20 @@ function update() {
         if (result.isConfirmed) {
             $.ajax({
                 method: "PUT",
-                url: "api/overtime/" + valId,
+                url: "api/overtime/reject/hr/" + valId,
                 dataType: "JSON",
                 beforeSend: addCsrfToken(),
                 contentType: "application/json",
                 data: JSON.stringify({
-                    start_time: valStart_time,
-                    end_time: valEnd_time,
-                    description: valDescription,
-                    status: valStatus,
-                    employee: valEmployee
+                    description: valDescription
                 }),
                 success: result => {
-                    $('#update-overtime').modal('hide')
+                    $('#reject-overtime').modal('hide')
                     $('#overtime-table').DataTable().ajax.reload()
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
-                        title: 'Successfully to update',
+                        title: 'Successfully to reject',
                         showConfirmButton: false,
                         timer: 2000
                     })
@@ -185,40 +113,30 @@ function update() {
     })
 }
 
-function overtimeDelete(id) {
-
+function approv(id) {
     Swal.fire({
         title: 'Are you sure?',
-        text: "You won't be delete this overtime!",
+        text: "Do you want to approv this submission!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Yes, approv it!'
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                method: "DELETE",
-                url: "api/overtime/" + id,
+                method: "PUT",
+                url: "api/overtime/approv/hr/" + id,
                 dataType: "JSON",
                 beforeSend: addCsrfToken(),
                 success: result => {
                     $('#overtime-table').DataTable().ajax.reload()
                     Swal.fire({
-                        title: 'Successfully to Delete',
-                        width: 600,
-                        padding: '3em',
-                        color: '#716add',
-                        background: '#fff',
-                        backdrop: `
-                            rgba(0,0,123,0.4)
-                            url("https://ask.libreoffice.org/uploads/asklibo/original/3X/3/5/35664d063435f940bda4cb3bb31ea0a6c5fed2f4.gif")
-                            left top
-                            no-repeat
-                        `,
+                        position: 'center',
                         icon: 'success',
+                        title: 'Successfully to approv',
                         showConfirmButton: false,
-                        timer: 5000
+                        timer: 2000
                     })
                 }
             })
@@ -227,18 +145,34 @@ function overtimeDelete(id) {
 
 }
 
-function detail(id) {
-    $.ajax({
-        method: "GET",
-        url: "api/overtime/" + id,
-        dataType: "JSON",
-        success: function (result) {
-            $('#overtime-det-id').val(`${result.id}`)
-            $('#overtime-det-start_time').val(`${result.start_time}`)
-            $('#overtime-det-end_time').val(`${result.end_time}`)
-            $('#overtime-det-description').val(`${result.description}`)
-            $('#overtime-det-status').val(`${result.status}`)
-            $('.overtime-up-employee').val(`${result.employee.name}`)
+function paid(id) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "Do you want to paid this submission!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, paid it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                method: "PUT",
+                url: "api/overtime/paid/" + id,
+                dataType: "JSON",
+                beforeSend: addCsrfToken(),
+                success: result => {
+                    $('#reimburse-table').DataTable().ajax.reload()
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Successfully to paid',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                }
+            })
         }
     })
+
 }

@@ -13,7 +13,6 @@ public class Type {
 
     private Integer id;
 
-    @NotBlank(message = "Invalid Name: Empty Name")
     private String name;
     
 }

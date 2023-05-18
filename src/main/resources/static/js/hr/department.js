@@ -20,11 +20,6 @@ $(document).ready(function () {
                 "data": null,
                 render: function (data, row, type, meta) {
                     return `
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detail-department"
-                        onclick="detail(${data.id})">
-                        <i class="bi bi-exclamation-circle-fill"></i>
-                    </button>
-
                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#update-department"
                         onclick="beforeUpdate(${data.id})">
                         <i class="bi bi-pencil-square"></i>
@@ -47,16 +42,29 @@ $(document).ready(function () {
         url: "api/employee",
         dataType: "JSON",
         success: function (result) {
-           
             $.each(result, function (key, value) {
-                $('.employeeproject-in-manager').append(
+                $('.department-in-manager').append(
                     '<option value="'
                     + value.id
                     + '">'
                     + value.name
                     + '</option>'
                 ), 
-                $('.employeeproject-in-hr').append(
+                $('.department-in-hr').append(
+                    '<option value="'
+                    + value.id
+                    + '">'
+                    + value.name
+                    + '</option>'
+                ), 
+                $('.department-up-manager').append(
+                    '<option value="'
+                    + value.id
+                    + '">'
+                    + value.name
+                    + '</option>'
+                ), 
+                $('.department-up-hr').append(
                     '<option value="'
                     + value.id
                     + '">'
@@ -69,20 +77,6 @@ $(document).ready(function () {
 
 });
 
-function detail(id) {
-    $.ajax({
-        method: "GET",
-        url: "api/department/" + id,
-        dataType: "JSON",
-        success: function (result) {
-            $('#department-det-id').val(`${result.id}`)
-            $('#department-det-name').val(`${result.name}`)
-            $('#department-det-manager').val(`${result.manager.name}`)
-            $('#department-det-hr').val(`${result.hr.name}`)
-        }
-    })
-}
-
 function create() {
     let valName = $('#department-in-name').val();
     let valManager = $('.department-in-manager').val();
@@ -94,12 +88,8 @@ function create() {
         beforeSend: addCsrfToken(),
         data: JSON.stringify({
             name: valName,
-            manager: {
-                id: valManager
-            },
-            hr: {
-                id: valHr
-            }
+            manager_id: valManager,
+            hr_id: valHr
         }),
         contentType: "application/json",
         success: result => {
@@ -134,8 +124,8 @@ function beforeUpdate(id) {
         success: function (result) {
             $('#department-up-id').val(`${result.id}`)
             $('#department-up-name').val(`${result.name}`)
-            $('.department-in-manager').val(`${result.manager.id}`)
-            $('.department-in-hr').val(`${result.hr.id}`)
+            $('.department-up-manager').val(`${result.manager.id}`)
+            $('.department-up-hr').val(`${result.hr.id}`)
         }
     })
 }
@@ -222,7 +212,7 @@ function departmentDelete(id) {
                         background: '#fff',
                         backdrop: `
                             rgba(0,0,123,0.4)
-                            url("https://ask.libreoffice.org/uploads/asklibo/original/3X/3/5/35664d063435f940bda4cb3bb31ea0a6c5fed2f4.gif")
+                            url("https://media.tenor.com/3ksij76-6M4AAAAC/sarahs-scribbles-throw.gif")
                             left top
                             no-repeat
                         `,

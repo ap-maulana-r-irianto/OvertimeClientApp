@@ -1,5 +1,7 @@
 package com.metrodata.clientapp.models;
 
+import java.util.List;
+
 import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
@@ -13,10 +15,12 @@ public class User {
 
     private Integer id;
 
-    @NotBlank(message = "Invalid Username: Empty Username")
     private String username;
 
-    @NotBlank(message = "Invalid Password: Empty Password")
     private String password;
+
+    private Boolean isEnabled = true;
+
+    private Boolean isAccountNonLocked = true;
 
 }

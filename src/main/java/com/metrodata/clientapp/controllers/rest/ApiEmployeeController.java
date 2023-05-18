@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 import com.metrodata.clientapp.models.Employee;
-import com.metrodata.clientapp.models.dto.requests.UserRequest;
 import com.metrodata.clientapp.services.EmployeeService;
 
 import lombok.AllArgsConstructor;
@@ -29,8 +28,8 @@ public class ApiEmployeeController {
     }
 
     @PostMapping
-    public Employee create(@RequestBody UserRequest userRequest){
-        return employeeService.create(userRequest);
+    public Employee create(@RequestBody Employee employee){
+        return employeeService.create(employee);
     }
 
     @PutMapping("/{id}")
@@ -39,7 +38,7 @@ public class ApiEmployeeController {
     }
 
     @DeleteMapping("/{id}")
-    public Employee create(@PathVariable int id){
+    public Employee delete(@PathVariable int id){
         return employeeService.delete(id);
     }
     

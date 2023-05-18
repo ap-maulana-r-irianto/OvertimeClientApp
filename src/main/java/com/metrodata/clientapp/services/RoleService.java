@@ -43,6 +43,15 @@ public class RoleService {
                 }).getBody();
     }
 
+    public Role getByName(String name) {
+        return restTemplate.exchange(
+                url + "/name/" + name,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<Role>() {
+                }).getBody();
+    }
+
     public Role create(Role role) {
         return restTemplate.exchange(
                 url,

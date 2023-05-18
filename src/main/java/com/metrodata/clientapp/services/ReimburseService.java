@@ -9,6 +9,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.metrodata.clientapp.models.Reimburse;
 import com.metrodata.clientapp.models.dto.requests.ReimburseRequest;
@@ -16,12 +18,11 @@ import com.metrodata.clientapp.models.dto.requests.ReimburseRequest;
 @Service
 public class ReimburseService {
 
+    @Autowired
     private RestTemplate restTemplate;
 
     @Autowired
-    public ReimburseService(RestTemplate restTemplate){
-        this.restTemplate = restTemplate;
-    }
+    private FileStorageService fileStorageService;
 
     @Value("${server.baseUrl}/reimburse")
     private String url;
@@ -44,7 +45,13 @@ public class ReimburseService {
                 }).getBody();
     }
 
-    public Reimburse create(ReimburseRequest reimburseRequest) {
+    public Reimburse create(ReimburseRequest reimburseRequest, MultipartFile file) {
+        String fileName = fileStorageService.storeFile(file);
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/downloadFile/")
+                .path(fileName)
+                .toUriString();
+        reimburseRequest.setFile_url(fileDownloadUri);
         return restTemplate.exchange(
                 url,
                 HttpMethod.POST,

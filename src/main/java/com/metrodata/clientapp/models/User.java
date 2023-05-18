@@ -1,5 +1,6 @@
 package com.metrodata.clientapp.models;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.validation.constraints.NotBlank;
@@ -23,4 +24,17 @@ public class User {
 
     private Boolean isAccountNonLocked = true;
 
+    // private List<Role> role;
+
+    // public boolean hasRole(String roleName) {
+    //     Iterator<Role> iterator = getRole().iterator();
+    //     while (iterator.hasNext()) {
+    //         Role role = iterator.next();
+    //         if (role.getName().equals(roleName)) {
+    //             return true;
+    //         }
+    //     }
+         
+    //     return false;
+    // }
 }

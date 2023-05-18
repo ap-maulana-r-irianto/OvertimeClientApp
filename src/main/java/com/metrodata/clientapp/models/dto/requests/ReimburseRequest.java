@@ -17,8 +17,6 @@ public class ReimburseRequest {
 
     private String file_url;
 
-    private Integer status_id;
-
     private Integer employee_id;
 
     private Integer type_id;

@@ -1,5 +1,6 @@
 package com.metrodata.clientapp.controllers;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.metrodata.clientapp.models.dto.requests.LoginRequest;
 import com.metrodata.clientapp.services.LoginService;
+
 import lombok.AllArgsConstructor;
 
 @Controller
@@ -22,35 +24,11 @@ public class LoginController {
     }
 
     @PostMapping
-    public String login(LoginRequest loginRequest) {
+    public String login(LoginRequest loginRequest, Authentication authentication) {
         if (!loginService.login(loginRequest)) {
             return "redirect:/login?error=true";
         }
-        return "redirect:/home_hr";
+        return "redirect:/home_employee";
     }
-
-    // @PostMapping("/hr")
-    // public String loginHr(LoginRequest loginRequest) {
-    //     if (!loginService.login(loginRequest)) {
-    //         return "redirect:/login?error=true";
-    //     }
-    //     return "redirect:/home_hr";
-    // }
-
-    // @PostMapping("/manager")
-    // public String loginManager(LoginRequest loginRequest) {
-    //     if (!loginService.login(loginRequest)) {
-    //         return "redirect:/login?error=true";
-    //     }
-    //     return "redirect:/home_executive";
-    // }
-
-    // @PostMapping("/employee")
-    // public String loginEmployee(LoginRequest loginRequest) {
-    //     if (!loginService.login(loginRequest)) {
-    //         return "redirect:/login?error=true";
-    //     }
-    //     return "redirect:/home_employee";
-    // }
 
 }

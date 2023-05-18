@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.metrodata.clientapp.models.Reimburse;
 import com.metrodata.clientapp.models.dto.requests.ReimburseRequest;
@@ -29,8 +30,8 @@ public class ApiReimburseController {
     }
 
     @PostMapping
-    public Reimburse create(@RequestBody ReimburseRequest reimburseRequest){
-        return reimburseService.create(reimburseRequest);
+    public Reimburse create(ReimburseRequest reimburseRequest, @RequestParam("file") MultipartFile file){
+        return reimburseService.create(reimburseRequest, file);
     }
 
     @PutMapping("/{id}")

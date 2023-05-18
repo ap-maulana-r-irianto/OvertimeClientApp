@@ -6,6 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.metrodata.clientapp.models.Reimburse;
 import com.metrodata.clientapp.models.dto.requests.ReimburseRequest;
@@ -40,8 +41,8 @@ public class ReimburseController {
     }
 
     @PostMapping
-    public String createEmployee(ReimburseRequest reimburseRequest) {
-        reimburseService.create(reimburseRequest);
+    public String createEmployee(ReimburseRequest reimburseRequest, @RequestParam("file") MultipartFile file) {
+        reimburseService.create(reimburseRequest, file);
         return "redirect:/employee";
     }
 
@@ -81,11 +82,11 @@ public class ReimburseController {
         return "hr/reimburse";
     }
 
-    @PostMapping("/hr")
-    public String createHr(ReimburseRequest reimburseRequest) {
-        reimburseService.create(reimburseRequest);
-        return "redirect:/hr";
-    }
+    // @PostMapping("/hr")
+    // public String createHr(ReimburseRequest reimburseRequest) {
+    //     reimburseService.create(reimburseRequest);
+    //     return "redirect:/hr";
+    // }
 
     @GetMapping("/hr/update/{id}")
     public String updateViewHr(@PathVariable int id, Model model) {
@@ -129,11 +130,11 @@ public class ReimburseController {
         return "executive/reimburse";
     }
 
-    @PostMapping("/executive")
-    public String createExecutive(ReimburseRequest reimburseRequest) {
-        reimburseService.create(reimburseRequest);
-        return "redirect:/executive";
-    }
+    // @PostMapping("/executive")
+    // public String createExecutive(ReimburseRequest reimburseRequest) {
+    //     reimburseService.create(reimburseRequest);
+    //     return "redirect:/executive";
+    // }
 
     @GetMapping("/executive/update/{id}")
     public String updateViewExecutive(@PathVariable int id, Model model) {

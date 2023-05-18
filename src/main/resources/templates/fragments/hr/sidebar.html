@@ -43,55 +43,47 @@
 
   <body>
     <div class="sidebar" th:fragment="sidebar">
-      <div class="logo-details">
-        <i
-          ><img
-            align="top"
-            th:src="@{img/LogoDashboard.png}"
-            width="200"
-            height="50"
-            alt="Gambar"
-        /></i>
-        <!-- <span class="logo_name">Overtime</span> -->
-      </div>
-      <ul class="nav-links">
-        <li>
-          <a th:href="@{/home_hr}">
-            <i class="bx bx-grid-alt"></i>
-            <span class="links_name">Dashboard</span>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/type_hr}">
-            <i class="bx bx-tag"></i>
-            <span class="links_name">Reimburse Type</span>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/reimburse_hr}">
-            <i class="bx bx-money"></i>
-            <span class="links_name">Reimburse</span>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/overtime_hr}">
-            <i class="bx bx-pie-chart-alt-2"></i>
-            <span class="links_name">Overtime</span>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/project_hr}">
-            <i class="bx bx-book-alt"></i>
-            <span class="links_name">Project</span>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/employee_hr}">
-            <i class="bx bx-user"></i>
-            <span class="links_name">Employee</span>
-          </a>
-        </li>
-
+        <div class="logo-details">
+            <i><img align="top" th:src="@{img/LogoDashboard.png}" width="200" height="55" alt="Gambar"></i>
+            <!-- <span class="logo_name">Overtime</span> -->
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a th:href="@{/home_hr}" class="active">
+                    <i class="bx bx-grid-alt"></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/type_hr}">
+                    <i class="bx bx-tag"></i>
+                    <span class="links_name">Reimburse Type</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/reimburse_hr}">
+                    <i class="bx bx-money"></i>
+                    <span class="links_name">Reimburse</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/overtime_hr}">
+                    <i class="bx bx-pie-chart-alt-2"></i>
+                    <span class="links_name">Overtime</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/project_hr}">
+                    <i class="bx bx-book-alt"></i>
+                    <span class="links_name">Project</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/employee_hr}">
+                    <i class="bx bx-user"></i>
+                    <span class="links_name">Employee</span>
+                </a>
+            </li>
         <li>
           <a th:href="@{/employee_project_hr}">
             <i class="bx bx-task"></i>

@@ -229,29 +229,31 @@ nav .profile-details i {
 	align-items: center;
 	justify-content: space-between;
 	flex-wrap: wrap;
-	padding: 0 20px;
+	padding: 20px 20px;
 	padding-top: 10px;
 	height: 30%;
 	margin-bottom: 26px;
-
 }
 
 .overview-boxes .box {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: calc(100% / 4 - 15px);
+	width: calc(100% / 3 - 20px);
 	background: #fff;
-	padding: 15px 14px;
+	padding: 30px 14px;
 	border-radius: 12px;
-	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+	margin-bottom: 30px;
+	box-shadow: 0 17px 17px rgba(0, 0, 0, 0.1);
+	color: white;
 
 
 }
 
 .overview-boxes .box-topic {
 	font-size: 15px;
-	font-weight: 300;
+	font-weight: 500;
+	color: black;
 }
 
 .home-content .box .number {
@@ -259,11 +261,14 @@ nav .profile-details i {
 	font-size: 40px;
 	margin-top: -6px;
 	font-weight: 500;
+	color: black;
 }
 
 .home-content .box .indicator {
 	display: flex;
 	align-items: center;
+	color: black;
+	
 
 }
 
@@ -273,7 +278,6 @@ nav .profile-details i {
 	background: #8FDACB;
 	line-height: 20px;
 	text-align: center;
-	background-color: #081D45;
 	border-radius: 50%;
 	color: #fff;
 	font-size: 20px;
@@ -281,7 +285,7 @@ nav .profile-details i {
 }
 
 .box .indicator i.down {
-	background: #e87d88;
+	background: #8FDACB;
 }
 
 .home-content .box .indicator .text {

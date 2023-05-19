@@ -34,10 +34,10 @@
       </div>
     </section>
 
-    <!-- Modal Update -->
+    <!-- Modal Reject -->
     <div
       class="modal fade"
-      id="update-overtime"
+      id="reject-overtime"
       data-bs-backdrop="static"
       data-bs-keyboard="false"
       tabindex="-1"
@@ -47,7 +47,9 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Approval Overtime</h5>
+            <h5 class="modal-title" id="staticBackdropLabel">
+              Reject Overtime
+            </h5>
             <button
               type="button"
               class="btn-close"
@@ -57,15 +59,13 @@
           </div>
           <div class="modal-body">
             <div class="mb-3">
-              <label for="name" class="form-label">Status</label>
-              <select class="form-select overtime-up-status">
-              </select>
+              <label for="name" class="form-label">Description</label>
+              <input
+                type="text"
+                class="form-control"
+                id="overtime-up-description"
+              />
               <input type="hidden" class="form-control" id="overtime-up-id" />
-              <input type="hidden" class="form-control" id="overtime-up-nominal" />
-              <input type="hidden" class="form-control" id="overtime-up-description" />
-              <input type="hidden" class="form-control" id="overtime-up-start_time" />
-              <input type="hidden" class="form-control" id="overtime-up-end_time" />
-              <input type="hidden" class="form-control" id="overtime-up-employee_project" />
             </div>
           </div>
           <div class="modal-footer">
@@ -76,8 +76,8 @@
             >
               Close
             </button>
-            <button type="button" class="btn btn-info" onclick="update()">
-              Submit
+            <button type="button" class="btn btn-primary" onclick="reject()">
+              submit
             </button>
           </div>
         </div>

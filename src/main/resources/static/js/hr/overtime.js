@@ -34,17 +34,17 @@ $(document).ready(function () {
                     return `
                     <button type="button" class="btn btn-warning"
                         onclick="approv(${data.id})">
-                        <i class="bi bi-pencil-square"></i>
+                        <i class="fa fa-check"></i>
                     </button>
 
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reject-overtime"
                         onclick="beforeReject(${data.id})">
-                        <i class="bi bi-trash3-fill"></i>
+                        <i class="fas fa-times-circle"></i>
                     </button>
 
                     <button type="button" class="btn btn-primary"
                         onclick="paid(${data.id})">
-                        <i class="bi bi-trash3-fill"></i>
+                        <i class="fas fa-dollar-sign"></i>
                     </button>
                     `;
                 }

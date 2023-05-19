@@ -20,7 +20,12 @@ $(document).ready(function () {
             data: 'type.name'
         },
         {
-            data: 'file_url'
+            "data": null,
+            render: function (data, row, type, meta) {
+                return `
+                <img th:src="${data.file_url}">
+                    `;
+            }
         },
         {
             data: 'status.name'
@@ -34,12 +39,12 @@ $(document).ready(function () {
                 return `
                 <button type="button" class="btn btn-warning"
                     onclick="approv(${data.id})">
-                    <i class="bi bi-pencil-square"></i>
+                    <i class="fa fa-check"></i>
                 </button>
 
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reject-reimburse"
                     onclick="beforeReject(${data.id})">
-                    <i class="bi bi-trash3-fill"></i>
+                    <i class="fas fa-times-circle"></i>
                 </button>
                     `;
             }

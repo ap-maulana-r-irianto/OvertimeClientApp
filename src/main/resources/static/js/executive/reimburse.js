@@ -23,7 +23,7 @@ $(document).ready(function () {
             "data": null,
             render: function (data, row, type, meta) {
                 return `
-                <img th:src="${data.file_url}">
+                <img src="${data.file_url}">
                     `;
             }
         },

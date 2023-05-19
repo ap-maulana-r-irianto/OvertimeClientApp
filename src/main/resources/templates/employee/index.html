@@ -13,7 +13,7 @@
             <div class="container">
               <form th:object="${employee}">
                 <label for="name" class="form-label">Department</label>
-                <input disabled="on" type="text" class="form-control" />
+                <input disabled="on" type="text" class="form-control" th:field="*{department.name}"/>
                 <div class="mb-3">
                   <label for="name" class="form-label">Name</label>
                   <input

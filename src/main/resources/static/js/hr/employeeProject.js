@@ -12,18 +12,6 @@ $(document).ready(function () {
             },
             {
                 data: 'project.name'
-            },
-            {
-                "data": null,
-                render: function (data, row, type, meta) {
-                    return `
-                    <button type="button" class="btn btn-danger"
-                        onclick="employeeprojectDelete(${data.id})">
-                        <i class="bi bi-trash3-fill"></i>
-                    </button>
-                    
-                    `;
-                }
             }
 
         ]

@@ -215,7 +215,7 @@ function projectDelete(id) {
                         background: '#fff',
                         backdrop: `
                             rgba(0,0,123,0.4)
-                            url("https://ask.libreoffice.org/uploads/asklibo/original/3X/3/5/35664d063435f940bda4cb3bb31ea0a6c5fed2f4.gif")
+                            url("https://media.tenor.com/3ksij76-6M4AAAAC/sarahs-scribbles-throw.gif")
                             left top
                             no-repeat
                         `,

@@ -20,7 +20,12 @@ $(document).ready(function () {
             data: 'type.name'
         },
         {
-            data: 'file_url'
+            "data": null,
+            render: function (data, row, type, meta) {
+                return `
+                <img src="${data.file_url}">
+                    `;
+            }
         },
         {
             data: 'status.name'

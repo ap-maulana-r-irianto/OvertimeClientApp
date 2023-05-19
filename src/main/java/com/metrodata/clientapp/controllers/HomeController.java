@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.metrodata.clientapp.models.Employee;
 import com.metrodata.clientapp.models.EmployeeProject;
 import com.metrodata.clientapp.models.Overtime;
+import com.metrodata.clientapp.models.User;
 import com.metrodata.clientapp.services.EmployeeProjectService;
 import com.metrodata.clientapp.services.EmployeeService;
 import com.metrodata.clientapp.services.UserService;
@@ -38,7 +39,7 @@ public class HomeController {
     }
 
     @GetMapping("/overtime_employee")
-    public String overtimeEmployee(Model model, Principal principal) {
+    public String overtimeEmployee(Model model) {
         return "employee/overtime";
     }
 
@@ -64,7 +65,10 @@ public class HomeController {
     }
 
     @GetMapping("/profil_executive")
-    public String profilExecutive(Model model) {
+    public String profilExecutive(Model model, Principal principal) {
+        model.addAttribute("employee", employeeService.getById(userService.getByUsername(principal.getName()).getId()));
+        model.addAttribute("employees", employeeService.getById(userService.getByUsername(principal.getName()).getId()));
+        model.addAttribute("user", userService.getByUsername(principal.getName()));
         return "executive/profil";
     }
 
@@ -99,7 +103,10 @@ public class HomeController {
     }
 
     @GetMapping("/profil_hr")
-    public String profilHr(Model model) {
+    public String profilHr(Model model, Principal principal) {
+        model.addAttribute("employee", employeeService.getById(userService.getByUsername(principal.getName()).getId()));
+        model.addAttribute("employees", employeeService.getById(userService.getByUsername(principal.getName()).getId()));
+        model.addAttribute("user", userService.getByUsername(principal.getName()));
         return "hr/profil";
     }
 

@@ -12,86 +12,199 @@
                 <div class="recent-sales box">
                     
                     <div class="container" >
-                        <form>
+                        <form th:object="${employee}">
                             <label for="name" class="form-label">Department</label>
-                            <input disabled="on" type="text" class="form-control">
+                            <input disabled="on" type="text" class="form-control" />
                             <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
-                                <input disabled="on" type="text" class="form-control">
+                              <label for="name" class="form-label">Name</label>
+                              <input
+                                disabled="on"
+                                type="text"
+                                class="form-control"
+                                th:field="*{name}"
+                              />
                             </div>
                             <div class="mb-3">
-                                <label for="name" class="form-label">Phone</label>
-                                <input disabled="on" type="text" class="form-control">
+                              <label for="name" class="form-label">Phone</label>
+                              <input
+                                disabled="on"
+                                type="text"
+                                class="form-control"
+                                th:field="*{phone}"
+                              />
                             </div>
                             <div class="mb-3">
-                                <label for="name" class="form-label">Email</label>
-                                <input disabled="on" type="text" class="form-control">
+                              <label for="name" class="form-label">Email</label>
+                              <input
+                                disabled="on"
+                                type="text"
+                                class="form-control"
+                                th:field="*{email}"
+                              />
                             </div>
                             <div class="mb-3">
-                                <label for="name" class="form-label">Status</label>
-                                <input disabled="on" type="text" class="form-control">
+                              <label for="name" class="form-label">Account Bank</label>
+                              <input
+                                disabled="on"
+                                type="text"
+                                class="form-control"
+                                th:field="*{account_bank}"
+                              />
                             </div>
                             <div class="mb-3">
-                                <label for="name" class="form-label">Payroll</label>
-                                <input disabled="on" type="text" class="form-control">
+                              <label for="name" class="form-label">Payroll</label>
+                              <input
+                                disabled="on"
+                                type="text"
+                                class="form-control"
+                                th:field="*{payroll}"
+                              />
                             </div>
-
-
-                            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#edit-profil">
-                                Edit Profil
+                            <input type="hidden" th:field="*{id}" id="id">
+                            <button
+                              type="button"
+                              class="btn btn-info"
+                              data-bs-toggle="modal"
+                              data-bs-target="#edit-account"
+                              onclick="beforeUpdateAccount(document.getElementById('id').value)"
+                            >
+                              Edit Account
                             </button>
-
-                             <!-- <tr th:each="country : ${countries}">
-            <td th:text="${country.id}"></td>
-            <td th:text="${country.code}"></td>
-            <td th:text="${country.name}"></td>
-            <td th:text="${country.region.name}"></td>
-            <td class="d-flex align-items-center gap-4">
-                <a th:href="@{/country/update/{id} (id=${country.id})}" class="btn btn-warning px-5 fw-bold">Edit</a>
-                <form th:action="@{/country/{id} (id=${country.id})}" th:method="DELETE">
-                    <button type="submit" class="btn btn-danger px-5 fw-bold"
-                            onclick="return confirm('Are you sure want to delete thiss!!!')">Delete</button>
-                </form>
-            </td>
-          </tr> -->
-                        </form>
+                            <button
+                              type="button"
+                              class="btn btn-info"
+                              data-bs-toggle="modal"
+                              data-bs-target="#edit-profil"
+                              onclick="beforeUpdateProfil(document.getElementById('id').value)"
+                            >
+                              Edit Profil
+                            </button>
+                          </form>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- Modal Edit -->
-    <div class="modal fade" id="edit-profil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <!-- Modal Edit Account-->
+    <div
+      class="modal fade"
+      id="edit-account"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Edit Profil</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Phone</label>
-                        <input type="number" class="form-control" id="phone">
-                    </div>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Username</label>
-                        <input type="name" class="form-control" id="Username">
-                    </div>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Password</label>
-                        <input type="name" class="form-control" id="Password">
-                    </div>
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Edit Account</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Username</label>
+                  <input
+                    type="name"
+                    class="form-control"
+                    id="user-up-username"
+                  />
+                  <input type="hidden" id="user-up-id" />
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-info" onclick="create()">Submit</button>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="user-up-password"
+                  />
                 </div>
-            </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="button" class="btn btn-info" onclick="updateAccount()">
+                  Submit
+                </button>
+              </div>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Modal Edit Profil-->
+    <div
+      class="modal fade"
+      id="edit-profil"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Edit Profil</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="modal-body">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="employee-up-name"/>
+                </div>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Phone</label>
+                  <input type="text" class="form-control" id="employee-up-phone"/>
+                </div>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="employee-up-email"/>
+                </div>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Account Bank</label>
+                  <input type="text" class="form-control" id="employee-up-account"/>
+                  <input type="hidden" id="employee-up-id">
+                  <input type="hidden" id="employee-up-payroll">
+                  <input type="hidden" id="employee-up-department">
+                  <input type="hidden" id="employee-up-manager">
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-info" onclick="updateProfil()">
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div th:replace="fragments/executive/sidebar :: script"></div>
+    <script th:src="@{/js/executive/profil.js}"></script>
 </body>
 </html>
